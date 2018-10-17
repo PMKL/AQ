@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <title>Google Map</title>
+    <link rel="stylesheet" href="google_maps.css"/>
+    <script type="application/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script type="application/javascript" src="https://cdn.jsdelivr.net/npm/vue"></script>
+	
+	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCsz_H86EN2uQh7eB0aNUqP0WDf3lIU2ZA&callback=initMap"></script>
+    <script type="text/javascript" src="google_maps.js"></script>
+</head>
+
+<body onload= "initMap()">
+	 <!--<input id="pac-input" class="controls" type="text" placeholder="Search Box">-->
+	
+	<div id="map">
+		
+	</div>
+	
+	<div id="search">
+		<input type="text" v-model="search_request" > </input>
+		<button v-on:click="google_Search" >Search</button>		<!-- wasnt working because the way spotify did it was a vue thing that we need to create, right now just working as normal event listener-->
+		
+	</div>
+	
+
+
+</body>
+</html>
