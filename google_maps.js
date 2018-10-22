@@ -69,5 +69,3 @@ function googleSuccess(data){
 	mapping.createMap();
 	
 }
-	
-
