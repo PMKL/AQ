@@ -3,27 +3,36 @@
 <head>
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
-    <title>Google Map</title>
-    <link rel="stylesheet" href="google_maps.css"/>
-    <script type="application/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <title>Leaflet Map</title>
+	<link rel="stylesheet" href="leaflet_map.css"/>
+	<script type="application/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+	
     <script type="application/javascript" src="https://cdn.jsdelivr.net/npm/vue"></script>
-	<script type="text/javascript" src="google_maps.js"></script>
-	<!--<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCsz_H86EN2uQh7eB0aNUqP0WDf3lIU2ZA&callback=initMap"></script>-->
+	
+	<script type="text/javascript" src="leaflet_map.js"></script>
+	
+	 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.4/dist/leaflet.css"
+	integrity="sha512-puBpdR0798OZvTTbP4A8Ix/l+A4dHDD0DGqYW6RQ+9jxkRFclaxxQb/SJAWZfWAkuyeQUytO7+7N4QKrDh+drA=="
+	crossorigin=""/>
+	<script src="https://unpkg.com/leaflet@1.3.4/dist/leaflet.js"
+	integrity="sha512-nMMmRyTVoLYqjP9hrbed9S+FzjZHW5gY1TWCHA5ckwXZBadntCNs8kEqAWdrb9O7rxbCaA4lKTIWjDXZxflOcA=="
+	crossorigin=""></script>
+	
 </head>
 
-<body>
+<body onload= "initMap()">
 	 
 	<div id="map">
 		
 	</div>
 	
-	<div id="search">
+	<!--<div id="search">
 		<input type="text" v-model="search_request" > </input>
 		<button v-on:click="google_Search" >Search</button>		
 		
-	</div>
+	</div>-->
 	
 
-	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCsz_H86EN2uQh7eB0aNUqP0WDf3lIU2ZA&callback=initMap"></script>
+	<!--<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCsz_H86EN2uQh7eB0aNUqP0WDf3lIU2ZA&callback=initMap"></script>-->
 </body>
 </html>
