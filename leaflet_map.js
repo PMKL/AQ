@@ -1,16 +1,55 @@
-var mapping;
-var blank;
+var app;
+var myMap;
+
 
 function initMap() {
+	myMap = L.map('map').setView([51.505, -0.09], 8);
 	
-   var myMap = L.map('map').setView([51.505, -0.09], 13);
    
-   L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+	L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
+    attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+    maxZoom: 18,
+    id: 'mapbox.streets',
+    accessToken: 'pk.eyJ1IjoibGluaDAwMDYiLCJhIjoiY2pubDNiOHhuMDJ0bzN2b3pvYjFwa2UxaSJ9.BVc1SC-6giTzsse9L1Xaxw'
 }).addTo(myMap);
-   
-  
-  
+
+
+
+
+var searchBox = L.Control.extend({
+	 onAdd: function(){
+		var input = document.getElementById("textBox");
+		/*input.placeholder = "Search";
+		input.addEventListener('keypress', function(pressed){
+			if(pressed.keyCode == 13){
+				changeCenter(input.value);
+		}});*/
+		return input;
+	}
+});
+
+(new searchBox).addTo(myMap);
+
+		
+app = new Vue({
+      el: "#textBox",
+      data: {
+			map_search: '',
+			input_placeholder: 'Search'
+        }
+        
+  })
+
+
+
+myMap.on('dragend', function(){ 
+var lat = myMap.getCenter().lat.toFixed(2);
+var lng = myMap.getCenter().lng.toFixed(2);
+
+app.input_placeholder = lat + "," + lng;
+
+});
+
 	/*var request =  { //Use this for requesting air quality info
 		url: "https://api.openaq.org/v1/parameters",
 		dataType: "json", 
@@ -20,59 +59,18 @@ function initMap() {
 		};
 		$.ajax(request); //Using the ajax method fr*/
 	
-	/* mapping = new Vue({
-		el: "#map",
-		data: {
-			center: {lat: 44.977, lng: -93.265},
-			zoom: 6
-		},
-		methods: {
-			createMap: function(){ 
-				new google.maps.Map(document.getElementById('map'), { 
-					center: this.center,
-					zoom: this.zoom
-				})
-			}
-			
-		}
-	})
-		
-    blank = new Vue({
-      el: "#search",
-      data: {
-			counter: 0,
-			search_request: '',
-			//search_results: []
-        }
-		
-        
-    })
-	
-	
-	mapping.createMap();*/
+
 	
 }
 
-/*function google_Search(event){
+function changeCenter(){
+	console.log(app.map_search);
+	var latlng = app.map_search.split(",");
+	console.log(latlng);
 	
-	var request2 = {
-		url:"https://maps.googleapis.com/maps/api/geocode/json?address=" + blank.search_request + "&key=AIzaSyCsz_H86EN2uQh7eB0aNUqP0WDf3lIU2ZA",
-		dataType: "json",
-		success: googleSuccess
-	};
-	
-	$.ajax(request2);
+	myMap.setView([latlng[0], latlng[1]], 8);
+
 }
 
-function googleSuccess(data){
-	console.log(data);
-	console.log(blank.search_request);
 
-	mapping.center.lat = parseFloat(data.results[0].geometry.location.lat)
-	mapping.center.lng = parseFloat(data.results[0].geometry.location.lng)
-	
-	mapping.createMap();
-	
-}*/
-	
 

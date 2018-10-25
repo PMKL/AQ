@@ -18,6 +18,8 @@
 	integrity="sha512-nMMmRyTVoLYqjP9hrbed9S+FzjZHW5gY1TWCHA5ckwXZBadntCNs8kEqAWdrb9O7rxbCaA4lKTIWjDXZxflOcA=="
 	crossorigin=""></script>
 	
+	<script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.50.0/mapbox-gl.js'></script>
+    <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.50.0/mapbox-gl.css' rel='stylesheet' />
 </head>
 
 <body onload= "initMap()">
@@ -26,11 +28,11 @@
 		
 	</div>
 	
-	<!--<div id="search">
-		<input type="text" v-model="search_request" > </input>
-		<button v-on:click="google_Search" >Search</button>		
-		
-	</div>-->
+	<div id="search">
+		<input id= "textBox" type="text" v-model="map_search" v-bind:placeholder="input_placeholder" 
+			 v-on:keyup.enter="changeCenter()">  </input>
+	
+	</div>
 	
 
 	<!--<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCsz_H86EN2uQh7eB0aNUqP0WDf3lIU2ZA&callback=initMap"></script>-->
