@@ -13,26 +13,9 @@ function initMap() {
     accessToken: 'pk.eyJ1IjoibGluaDAwMDYiLCJhIjoiY2pubDNiOHhuMDJ0bzN2b3pvYjFwa2UxaSJ9.BVc1SC-6giTzsse9L1Xaxw'
 }).addTo(myMap);
 
-
-
-
-var searchBox = L.Control.extend({
-	 onAdd: function(){
-		var input = document.getElementById("textBox");
-		/*input.placeholder = "Search";
-		input.addEventListener('keypress', function(pressed){
-			if(pressed.keyCode == 13){
-				changeCenter(input.value);
-		}});*/
-		return input;
-	}
-});
-
-(new searchBox).addTo(myMap);
-
 		
 app = new Vue({
-      el: "#textBox",
+      el: "#search",
       data: {
 			map_search: '',
 			input_placeholder: 'Search'
@@ -68,11 +51,11 @@ myMap.on('dragend', function(){
 			
 		
 		};
-		$.ajax(request); //Using the ajax method fr
+		$.ajax(request); //Using the ajax method fr*/
 	
 
 	
-}*/
+}
 
 function changeCenter(){
 	console.log(app.map_search);
@@ -107,6 +90,5 @@ function mapSearch(){
 function test(data){
 	console.log(data);
 }
-
 
 

@@ -2,17 +2,29 @@
  * element that contains the map. */
 #map {
   height: 100%;
-  
+  width: 75%;
 }
 
-/*#search{
-	position: fixed;
-	top: 20px;
-	left: 250px;
-}*/
 /* Optional: Makes the sample page fill the window. */
 html, body {
   height: 100%;
   margin: 0;
   padding: 0;
+}
+
+#search{
+	/*position: absolute;
+	top: 20px;
+	left: 10px;*/
+	
+}
+
+#textBox{
+	/*background-color: blue;*/
+	float: right;
+	/*top: 10px;*/
+	margin-right: 5px;
+	width: 23vw;
+	
+	
 }
