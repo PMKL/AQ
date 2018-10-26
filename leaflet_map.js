@@ -6,6 +6,7 @@ function initMap() {
 	myMap = L.map('map').setView([51.505, -0.09], 7);
 	
    //var locationiqtoken = 960b659c86dc12;
+	// var locationiq token = pk.8aa648cba232839a750373967d785a53
 	L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
     attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
     maxZoom: 18,
