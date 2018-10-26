@@ -23,18 +23,15 @@
 </head>
 
 <body onload= "initMap()">
-	 
+	<div id="search">
+		<input id= "textBox" type="text" v-model="map_search" v-bind:placeholder="input_placeholder" 
+			 v-on:keyup.enter="mapSearch()">  </input>
+			 
+	</div>
 	<div id="map">
+	
 		
 	</div>
 	
-	<div id="search">
-		<input id= "textBox" type="text" v-model="map_search" v-bind:placeholder="input_placeholder" 
-			 v-on:keyup.enter="changeCenter()">  </input>
-	
-	</div>
-	
-
-	<!--<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCsz_H86EN2uQh7eB0aNUqP0WDf3lIU2ZA&callback=initMap"></script>-->
 </body>
 </html>
