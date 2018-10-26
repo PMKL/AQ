@@ -3,9 +3,9 @@ var myMap;
 
 
 function initMap() {
-	myMap = L.map('map').setView([51.505, -0.09], 8);
+	myMap = L.map('map').setView([51.505, -0.09], 7);
 	
-   
+   //var locationiqtoken = 960b659c86dc12;
 	L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
     attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
     maxZoom: 18,
@@ -41,27 +41,38 @@ app = new Vue({
   })
 
 
-
 myMap.on('dragend', function(){ 
-var lat = myMap.getCenter().lat.toFixed(2);
-var lng = myMap.getCenter().lng.toFixed(2);
+	var lat = myMap.getCenter().lat.toFixed(2);
+	var lng = myMap.getCenter().lng.toFixed(2);
+	var settings = {
+	"async": true,
+	"crossDomain": true,
+	"url": "https://us1.locationiq.com/v1/reverse.php?key=960b659c86dc12&lat="+lat+"&lon="+lng+"&format=json",
+	"method": "GET"
+}
 
-app.input_placeholder = lat + "," + lng;
+	$.ajax(settings).done(function (response) {
+	console.log(response);
+	var loc = response.address.state;
+	app.input_placeholder = loc + " ("+lat + "," + lng+")";
 
-});
+	}).catch(function(){ app.input_placeholder = "Ocean" + " ("+lat + "," + lng+")"}
+		);
+})
+
 
 	/*var request =  { //Use this for requesting air quality info
-		url: "https://api.openaq.org/v1/parameters",
+		url: "https://api.openaq.org/v1/measurements/",
 		dataType: "json", 
         success: test
 			
 		
 		};
-		$.ajax(request); //Using the ajax method fr*/
+		$.ajax(request); //Using the ajax method fr
 	
 
 	
-}
+}*/
 
 function changeCenter(){
 	console.log(app.map_search);
@@ -70,6 +81,31 @@ function changeCenter(){
 	
 	myMap.setView([latlng[0], latlng[1]], 8);
 
+}
+
+function mapSearch(){
+	var test = app.map_search.split(",");
+	if(test.length > 1 && isNaN(test[0]) == false && isNaN(test[1]) == false){
+		changeCenter();
+	}
+	else{
+		var settings = {
+		"async": true,
+		"crossDomain": true,
+		"url": "https://api.locationiq.com/v1/autocomplete.php?key=960b659c86dc12&q=" + app.map_search,
+		"method": "GET"
+		}
+
+		$.ajax(settings).done(function (response) {
+		//console.log(response);
+			myMap.setView([response[0].lat, response[0].lon], 7);
+		});
+
+	}
+}
+
+function test(data){
+	console.log(data);
 }
 
 
