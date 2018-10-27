@@ -1,30 +1,86 @@
-/* Always set the map height explicitly to define the size of the div
- * element that contains the map. */
+
+ 
+ /*Map and Table CSS Styles*/
 #map {
   height: 100%;
   width: 75%;
 }
 
-/* Optional: Makes the sample page fill the window. */
 html, body {
   height: 100%;
   margin: 0;
   padding: 0;
 }
 
-#search{
-	/*position: absolute;
-	top: 20px;
-	left: 10px;*/
+
+#textBox{
+	position: absolute;
+	float: right;
+	top: 24px;
+	margin-left: 75vw;
+	width: 25vw;
+	z-index:1000;
+	
+
+}
+
+#fullButton{
+	margin-top: 25px;
+	color: white;
+	text-transform: uppercase;
+	background: #9370DB;
+	padding: 10px;
+	border-radius: 5px;
+	display: inline-block;
+	border: none;
+}
+
+.navigationbar
+{
+	position: absolute;
+	float: right;
+	margin-left: 75vw;
+	width: 25vw;
+	height: 1.5rem;
+	background-color: #9370DB;
 	
 }
 
-#textBox{
-	/*background-color: blue;*/
-	float: right;
-	/*top: 10px;*/
-	margin-right: 5px;
-	width: 23vw;
+.navigationlinks
+{
+
+	padding: 5vw;
+	color: white;	
 	
+}
+
+/*CSS styles used in aboutProject page*/
+#aboutNavigation
+{
+	width: 100%;
+	height: 2rem;
+	position: fixed;
+	background-color: #9370DB;
+	text-align: center;
+	
+}
+
+#personalphoto
+{
+	float: left;
+	width: 150px;
+	height: 200px;
+	padding: 1rem 2rem 3rem 1rem;
+	
+}
+
+h1{
+	text-align: center;
+	font: italic bold 150% "Times New Roman", sans-serif;
+}
+h3
+{
+	font: italic bold 100% "Times New Roman", sans-serif;
+	text-decoration: underline;
 	
 }

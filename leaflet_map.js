@@ -1,18 +1,33 @@
 var app;
 var myMap;
+var mapFullScreen;
 
 
 function initMap() {
+	mapFullScreen= false;
 	myMap = L.map('map').setView([51.505, -0.09], 7);
 	
    //var locationiqtoken = 960b659c86dc12;
-	// var locationiq token = pk.8aa648cba232839a750373967d785a53
 	L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
     attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
     maxZoom: 18,
     id: 'mapbox.streets',
     accessToken: 'pk.eyJ1IjoibGluaDAwMDYiLCJhIjoiY2pubDNiOHhuMDJ0bzN2b3pvYjFwa2UxaSJ9.BVc1SC-6giTzsse9L1Xaxw'
 }).addTo(myMap);
+
+
+
+
+var fullScreen = L.Control.extend({ //This allows the full screen button to be placed on top of the map
+	 onAdd: function(){
+		var input = document.getElementById("fullButton");
+		
+		input.addEventListener('click', full);
+		return input;
+	}
+});
+
+(new fullScreen).addTo(myMap);
 
 		
 app = new Vue({
@@ -25,7 +40,7 @@ app = new Vue({
   })
 
 
-myMap.on('dragend', function(){ 
+myMap.on('dragend', function(){ //function changes search box info based on user panning the map
 	var lat = myMap.getCenter().lat.toFixed(2);
 	var lng = myMap.getCenter().lng.toFixed(2);
 	var settings = {
@@ -36,38 +51,41 @@ myMap.on('dragend', function(){
 }
 
 	$.ajax(settings).done(function (response) {
-	console.log(response);
+	
 	var loc = response.address.state;
+	
+	if(loc === undefined){
+		loc = response.address.country;
+	}
+	
 	app.input_placeholder = loc + " ("+lat + "," + lng+")";
 
-	}).catch(function(){ app.input_placeholder = "Ocean" + " ("+lat + "," + lng+")"}
+	}).catch(function(){ app.input_placeholder = "Ocean" + " ("+lat + "," + lng+")"} //An error will occur in the GET request if drag over ocean, better way to do this?
 		);
 })
 
 
-	/*var request =  { //Use this for requesting air quality info
-		url: "https://api.openaq.org/v1/measurements/",
-		dataType: "json", 
-        success: test
+var request =  { //Request to AQ for latest measurements
+	url: "https://api.openaq.org/v1/latest", 
+	dataType: "json", 
+    success: addMarkers
 			
 		
-		};
-		$.ajax(request); //Using the ajax method fr*/
-	
+	};
+	$.ajax(request); 
+		
+} //End of initMap()
 
-	
-}
-
-function changeCenter(){
+function changeCenter(){ //Adjusts search box if user enters lat/lon
 	console.log(app.map_search);
 	var latlng = app.map_search.split(",");
-	console.log(latlng);
+	//console.log(latlng);
 	
 	myMap.setView([latlng[0], latlng[1]], 8);
 
 }
 
-function mapSearch(){
+function mapSearch(){ //Adjusts search box if user enters name of location
 	var test = app.map_search.split(",");
 	if(test.length > 1 && isNaN(test[0]) == false && isNaN(test[1]) == false){
 		changeCenter();
@@ -88,8 +106,79 @@ function mapSearch(){
 	}
 }
 
-function test(data){
+function addMarkers(data){ //Adds markers to the map
+
 	console.log(data);
+	var i;
+	var lat;
+	var lon;
+	var marker;
+	var parameter;
+	var value;
+
+	for(i=0;i < data.results.length;i++){
+			if(data.results[i].city === 'Stockholm'){ //For some reason there is one object in the return without coordinates?
+				lat = "59.3292";
+				lon = "18.0686";
+				var stockString = "";
+				marker = L.marker([lat, lon]).addTo(myMap);
+				for(counter = 0; counter < data.results[i].measurements.length; counter++){ 
+					parameter = data.results[i].measurements[counter].parameter.toString();
+					value = data.results[i].measurements[counter].value.toString();
+					stockString = stockString +"<i>"+parameter+"</i>: "+value+"<br>";
+				}
+				marker.bindPopup("<b>Measurements: </b><br>"+paramString);
+				
+				marker.on('mouseover', function (e) {
+				this.openPopup();
+				});
+				marker.on('mouseout', function (e) {
+				this.closePopup();
+				});
+			}
+			
+			else{
+				var paramString= "";
+				var counter;
+				lat = data.results[i].coordinates.latitude;
+				lon = data.results[i].coordinates.longitude;
+				marker = L.marker([lat, lon]).addTo(myMap);
+				
+				for(counter = 0; counter < data.results[i].measurements.length; counter++){ 
+					parameter = data.results[i].measurements[counter].parameter.toString();
+					value = data.results[i].measurements[counter].value.toString();
+					paramString = paramString +"<i>"+parameter+"</i>: "+value+"<br>";
+				}
+				marker.bindPopup("<b>Measurements:</b><br>"+paramString);
+				
+				marker.on('mouseover', function (e) {
+				this.openPopup();
+				});
+				marker.on('mouseout', function (e) {
+				this.closePopup();
+				});
+			}
+			
+			
+				
+				
+	}
 }
 
+function full(){ //Used to adjust styles when full screen button is toggled
+	var textBox = document.getElementById('textBox');
+	if(mapFullScreen === false){
+		var mapContainer = document.getElementById('map');
+		mapContainer.style.width = '100%';
+		mapFullScreen = true;
+		textBox.style.top= "0px";
+	}
+	else{
+		
+		var mapContainer = document.getElementById('map');
+		mapContainer.style.width = '75%';
+		mapFullScreen = false;
+		textBox.style.top = "24px";
+	}
 
+}
