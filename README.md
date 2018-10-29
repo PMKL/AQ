@@ -1,20 +1,23 @@
-#Air Quality Web App
+Air Quality Web App
 ===================
 
 Due: `Nov 7 by 3:25pm`
 Points: `75`
 Submission: `Website url`
  
-##Task
+Task
+===================
   For this project, you will create a single page application about air quality. You will use at least 2 external APIs to retrieve data from (Leaflet), and the Open AQ Platform). Your application should be interactive, responsive, and allow a user to investigate air quality from various geographical regions. This project will also incorporate Vue JS as a framework to make building the app simpler. You will also create a second web page - "About the project", which will document your team, your development process, demo the final application. For this project, you are free to use other JavaScript or CSS libraries as you see fit.
 
-##About the Data Sets
+About the Data Sets
+===================
 **Leaflet**:
   The Leaflet API allows you to render interactive maps in your web page as well as overlay data on top of the map. The map can be modified either by user interaction or by JavaScript commands.
 **Open AQ Platform**:
   The Open AQ Platform maintains a rolling 90 day historical data set of air quality measures (i.e. everything from today back until 90 days ago). The data set includes information about locations where measurements exist (and how many measurements were taken), measurements of different particles in the air (carbon monoxide, sulfur dioxide, etc.), and timestamps for when measurements were taken.
 
-##Grading Rubric (75 pts)
+Grading Rubric (75 pts)
+===================
 **To earn 55/75 points (grade: C)**
   * | **1 / 3** |**Show a map** using the Leaflet API
     1. Pan and zoom available with mouse click-and-drag and scroll wheel interaction 
@@ -52,6 +55,7 @@ Submission: `Website url`
     4. See Leaflet plugin: https://github.com/Leaflet/Leaflet.heat  
   * Allow map (along with the location input box) to go **fullscreen**
 
-##Submission
+Submission
+===================
   You will be working in groups of 2 students to complete this project. You are allowed to work together on all aspects of the project or to divide tasks equally among the members. You are NOT however allowed to collaborate with students from other teams. The only exception to this is posting general questions/answers to the discussion board on Canvas.
   Code should be saved in a private repository on GitHub while working on the project. You should make the repository public on the date the project is due. Your code can be turned into a live web site by following the instructions at https://help.github.com/articles/user-organization-and-project-pages/#project-pages. In order to submit, you should enter the the project's URL for the assignment (in Canvas). After submitting, add a comment describing what you did and what your partner did to contribute to the overall project.
