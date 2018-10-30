@@ -65,8 +65,8 @@ myMap.on('dragend', function(){ //function changes search box info based on user
 })
 
 
-var request =  { //Request to AQ for latest measurements
-	url: "https://api.openaq.org/v1/latest", 
+var request =  { //Request to AQ for latest measurements for adding markers
+	url: "https://api.openaq.org/v1/latest?limit=10000", // requesting  maximum measurement locations
 	dataType: "json", 
     success: addMarkers
 			
@@ -74,7 +74,7 @@ var request =  { //Request to AQ for latest measurements
 	};
 	$.ajax(request); 
 		
-} //End of initMap()
+} //End of initMap
 
 function changeCenter(){ //Adjusts search box if user enters lat/lon
 	console.log(app.map_search);
@@ -115,39 +115,24 @@ function addMarkers(data){ //Adds markers to the map
 	var marker;
 	var parameter;
 	var value;
+	var unit;
+	var testCluster = L.markerClusterGroup();
 
 	for(i=0;i < data.results.length;i++){
-			if(data.results[i].city === 'Stockholm'){ //For some reason there is one object in the return without coordinates?
-				lat = "59.3292";
-				lon = "18.0686";
-				var stockString = "";
-				marker = L.marker([lat, lon]).addTo(myMap);
-				for(counter = 0; counter < data.results[i].measurements.length; counter++){ 
-					parameter = data.results[i].measurements[counter].parameter.toString();
-					value = data.results[i].measurements[counter].value.toString();
-					stockString = stockString +"<i>"+parameter+"</i>: "+value+"<br>";
-				}
-				marker.bindPopup("<b>Measurements: </b><br>"+paramString);
-				
-				marker.on('mouseover', function (e) {
-				this.openPopup();
-				});
-				marker.on('mouseout', function (e) {
-				this.closePopup();
-				});
-			}
+		if(data.results[i].hasOwnProperty("coordinates")){
 			
-			else{
 				var paramString= "";
 				var counter;
 				lat = data.results[i].coordinates.latitude;
 				lon = data.results[i].coordinates.longitude;
-				marker = L.marker([lat, lon]).addTo(myMap);
+				//testCluster.addLayer(L.marker([lat, lon])); //testing clusters
+				marker = L.marker([lat, lon])//.addTo(myMap);
 				
 				for(counter = 0; counter < data.results[i].measurements.length; counter++){ 
 					parameter = data.results[i].measurements[counter].parameter.toString();
 					value = data.results[i].measurements[counter].value.toString();
-					paramString = paramString +"<i>"+parameter+"</i>: "+value+"<br>";
+					unit = data.results[i].measurements[counter].unit.toString();
+					paramString = paramString +"<i>"+parameter+"</i>: "+value+" "+unit+"<br>";
 				}
 				marker.bindPopup("<b>Measurements:</b><br>"+paramString);
 				
@@ -157,12 +142,13 @@ function addMarkers(data){ //Adds markers to the map
 				marker.on('mouseout', function (e) {
 				this.closePopup();
 				});
-			}
+				testCluster.addLayer(marker); //used for clustering 
 			
+		}
 			
-				
-				
 	}
+	
+	myMap.addLayer(testCluster); //used for clustering
 }
 
 function full(){ //Used to adjust styles when full screen button is toggled
