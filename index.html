@@ -1,50 +1,72 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <meta charset="utf-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1"/>
-    <title>Leaflet Map</title>
-	<link rel="stylesheet" href="leaflet_map.css"/>
-	<script type="application/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-	
-    <script type="application/javascript" src="https://cdn.jsdelivr.net/npm/vue"></script>
-	
-	<script type="text/javascript" src="leaflet_map.js"></script>
-	
-	<link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.4/dist/leaflet.css"
-	integrity="sha512-puBpdR0798OZvTTbP4A8Ix/l+A4dHDD0DGqYW6RQ+9jxkRFclaxxQb/SJAWZfWAkuyeQUytO7+7N4QKrDh+drA=="
-	crossorigin=""/>
-	<script src="https://unpkg.com/leaflet@1.3.4/dist/leaflet.js"
-	integrity="sha512-nMMmRyTVoLYqjP9hrbed9S+FzjZHW5gY1TWCHA5ckwXZBadntCNs8kEqAWdrb9O7rxbCaA4lKTIWjDXZxflOcA=="
-	crossorigin=""></script>
-	
-	
-	<script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.50.0/mapbox-gl.js'></script>
-    <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.50.0/mapbox-gl.css' rel='stylesheet' />
 
-	<link rel= 'stylesheet' href='Leaflet.markercluster-1.4.1\dist\MarkerCluster.css' /> <!--Sources for clustering markers -->
-	<link rel= 'stylesheet' href='Leaflet.markercluster-1.4.1\dist\MarkerCluster.Default.css' />
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+	<title>Leaflet Map</title>
+	<!-- LeafLet map CSS -->
+	<link rel="stylesheet" href="leaflet_map.css" />
+	<!-- jQuery Script -->
+	<script type="application/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+
+	<!-- Vue Script -->
+	<script type="application/javascript" src="https://cdn.jsdelivr.net/npm/vue"></script>
+
+	<!-- Our custom Script -->
+	<script type="text/javascript" src="leaflet_map.js"></script>
+
+	<!-- Leaflet CSS -->
+	<link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.4/dist/leaflet.css" integrity="sha512-puBpdR0798OZvTTbP4A8Ix/l+A4dHDD0DGqYW6RQ+9jxkRFclaxxQb/SJAWZfWAkuyeQUytO7+7N4QKrDh+drA==" crossorigin="" />
+
+	<!-- Leaflet Script -->
+	<script src="https://unpkg.com/leaflet@1.3.4/dist/leaflet.js" integrity="sha512-nMMmRyTVoLYqjP9hrbed9S+FzjZHW5gY1TWCHA5ckwXZBadntCNs8kEqAWdrb9O7rxbCaA4lKTIWjDXZxflOcA==" crossorigin=""></script>
+
+	<!-- Mapbox Map Tile Script -->
+	<script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.50.0/mapbox-gl.js'></script>
+	<!-- Leaflet maptile CSS-->
+	<link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.50.0/mapbox-gl.css' rel='stylesheet' />
+
+	<!-- Leaflet Marker CSS -->
+	<link rel='stylesheet' href='Leaflet.markercluster-1.4.1\dist\MarkerCluster.css' />
+
+	<!-- Sources for clustering markers -->
+	<link rel='stylesheet' href='Leaflet.markercluster-1.4.1\dist\MarkerCluster.Default.css' />
+
+	<!-- Map tile Script -->
 	<script src='Leaflet.markercluster-1.4.1\dist\leaflet.markercluster-src.js'> </script>
-	
+
 </head>
 
-<body onload= "initMap()">
-	<div class= "navigationbar">
-	
-		<a  class= "navigationlinks" href= "aboutProject.html" target="_self"> About the Authors </a>
-		
+<body onload="initMap()">
+	<!-- Navagation Bar -->
+	<div class="navigationbar">
+		<!-- link to about section -->
+		<a class="navigationlinks" href="aboutProject.html" target="_self"> About the Authors </a>
 	</div>
+	<!-- End of Nav. -->
+
+	<!-- Search Bar -->
 	<div id="search">
-		<input id= "textBox" type="text"  v-model="map_search" v-bind:placeholder="input_placeholder" 
-			 v-on:keyup.enter="mapSearch()">  </input>
-				
+
+		<input id="textBox" type="text" v-model="map_search" v-bind:placeholder="input_placeholder" v-on:keyup.enter="mapSearch()">
+		</input>
+
 	</div>
-	<button id="fullButton" type="button"><></button> 	
+	<!-- End of Search Bar -->
+
+	<!-- Button for Fullscreen -->
+	<button id="fullButton" type="button">
+		<span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776; open</span>
+	</button>
+	<!-- End of FullScreen Button -->
+
+	<!-- Map container, nothing needed to go in -->
 	<div id="map">
-	
-		
 	</div>
-	
-	
+	<!-- End of Map -->
+
 </body>
+
 </html>
