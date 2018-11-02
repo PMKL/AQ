@@ -49,16 +49,30 @@
 
 	<!-- Search Bar -->
 	<div id="search">
-
-		<input id="textBox" type="text" v-model="map_search" v-bind:placeholder="input_placeholder" v-on:keyup.enter="mapSearch()">
-		</input>
-
+		<input id= "textBox" type="text"  v-model="map_search" v-bind:placeholder="input_placeholder" 
+			 v-on:keyup.enter="mapSearch()">  </input>
+		
+		<h4 id= "tableTitle"> Air Quality Measurements </h4>
+		<h5 id= "tableLocation"> Nearest Measurement:  {{nearestLocation}}   </h5>
+		<table id= "realTable">
+			<tr>
+				<th> Parameters </th>
+				<th> Value </th>
+				<th> Unit </th>
+			</tr>
+			<tr v-for="item in searchResults" v-bind:style="background(item)">
+				<td class= "tableData"> {{item.parameter}} </td>
+				<td class= "tableData"> {{item.value}} </td>
+				<td class= "tableData"> {{item.unit}} </td>
+			</tr>
+		</table>
+				
 	</div>
 	<!-- End of Search Bar -->
 
 	<!-- Button for Fullscreen -->
 	<button id="fullButton" type="button">
-		<span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776; open</span>
+		<span style="font-size:30px;cursor:pointer">&#9776; open</span>
 	</button>
 	<!-- End of FullScreen Button -->
 

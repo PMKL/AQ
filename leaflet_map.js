@@ -33,19 +33,40 @@ function initMap() {
 
 	//Search box input will start with this by default
 	app = new Vue({
-		el: "#search",
-		data: {
+      el: "#search",
+      data: {
 			map_search: '',
-			input_placeholder: 'Search'
-		}
-	})
+			input_placeholder: 'Search',
+			nearestLocation: "",
+			searchResults: [],
+			colors: {green: "rgb(0,228,0)", yellow: "rgb(255,255,0)", orange: "rgb(255,126,0)", red: "rgb(255,0,0)", purple: "rgb(143,63,151)", maroon: "rgb(126,0,35)"}
+			
+		
+        },
+	  methods: {
+		  background: function (info){
+				  if(info.parameter === "pm10"){
+					  if(info.value > 0 && info.value < 55){
+						  
+						  return "background-color: "+ app.colors.green 
+					  }
+				  }
+				  else{
+					  
+					return "background-color: teal;"
+				  }
+		  }
+	  }
+        
+  })
 
+    myMap.on('zoomend', requestUpdate); //updates table with zoom change 
 	//Search box will be updated with the location where the map is centered
 	//Only when movement/zoom actions are complete
 	myMap.on('dragend', function () {
 		//function changes search box info based on user panning the map
-		var lat = myMap.getCenter().lat.toFixed(2);
-		var lng = myMap.getCenter().lng.toFixed(2);
+		var lat = myMap.getCenter().lat.toFixed(4);
+		var lng = myMap.getCenter().lng.toFixed(4);
 		var settings = {
 			"async": true,
 			"crossDomain": true,
@@ -68,6 +89,7 @@ function initMap() {
 			}
 			//An error will occur in the GET request if drag over ocean, better way to do this?
 		);
+		requestUpdate(); //update table after drag
 	})
 
 	var request = {
@@ -86,11 +108,11 @@ function initMap() {
 
 function changeCenter() {
 	//Adjusts search box if user enters lat/lon
-	console.log(app.map_search);
+	
 	var latlng = app.map_search.split(",");
-	//console.log(latlng);
 
 	myMap.setView([latlng[0], latlng[1]], 8);
+	requestUpdate(); //update table after lat long search 
 }
 //end of changeCenter
 
@@ -112,6 +134,7 @@ function mapSearch() {
 		$.ajax(settings).done(function (response) {
 			//console.log(response);
 			myMap.setView([response[0].lat, response[0].lon], 7);
+			requestUpdate(); // table update after search of location 
 		});
 
 	}
@@ -166,19 +189,92 @@ function addMarkers(data) {
 	myMap.addLayer(testCluster); //used for clustering
 }
 
-function full() { //Used to adjust styles when full screen button is toggled
+function full(){ //Used to adjust styles when full screen button is toggled
 	var textBox = document.getElementById('textBox');
-	if (mapFullScreen === false) {
+	var table = document.getElementById('realTable');
+	var tableTit = document.getElementById('tableTitle');
+	var tableHed = document.getElementById('tableLocation');
+	if(mapFullScreen === false){
+		
 		var mapContainer = document.getElementById('map');
+		table.style.zIndex = '0';
+		tableTit.style.zIndex = '0';
+		tableHed.style.zIndex = '0';
 		mapContainer.style.width = '100%';
 		mapFullScreen = true;
-		textBox.style.top = "0px";
-	} else {
-
+		textBox.style.top= "0px";
+	}
+	else{
+		
 		var mapContainer = document.getElementById('map');
+		table.style.zIndex= '1000';
+		tableTit.style.zIndex= '1000';
+		tableHed.style.zIndex= '1000';
 		mapContainer.style.width = '75%';
 		mapFullScreen = false;
 		textBox.style.top = "24px";
 	}
 
 }
+
+function requestUpdate(){
+	var lat = myMap.getCenter().lat.toFixed(2);
+	var lng = myMap.getCenter().lng.toFixed(2);
+	
+	 var req3= $.getJSON("https://api.openaq.org/v1/latest?coordinates="+lat+","+lng+"&radius=100");
+	 var req4= $.getJSON("https://api.openaq.org/v1/latest?coordinates="+lat+","+lng+"&radius=1000");
+	 var req5= $.getJSON("https://api.openaq.org/v1/latest?coordinates="+lat+","+lng+"&radius=10000");
+	 var req6= $.getJSON("https://api.openaq.org/v1/latest?coordinates="+lat+","+lng+"&radius=100000");
+	 var req7= $.getJSON("https://api.openaq.org/v1/latest?coordinates="+lat+","+lng+"&radius=1000000");
+	 var req8= $.getJSON("https://api.openaq.org/v1/latest?coordinates="+lat+","+lng+"&radius=2000000"); //Could go larger but not sure if its necessary
+	 
+	Promise.all([req3, req4, req5, req6, req7,req8])
+	.then(data => {
+			if(data[0].results.length > 0){
+				updateTable(data[0]);
+				
+			}
+			else if(data[1].results.length > 0){
+				updateTable(data[1]);
+			
+			}
+			else if(data[2].results.length > 0){
+				updateTable(data[2]);
+				
+			}
+			else if(data[3].results.length > 0){
+				updateTable(data[3]);
+				
+			}
+			else if(data[4].results.length > 0){
+				updateTable(data[4]);
+				
+			}
+			else if(data[5].results.length > 0){
+				updateTable(data[5]);
+				
+			}
+			
+	});
+	 
+
+}
+function updateTable(data){
+	if (data.results.length > 0){
+		app.searchResults.length = 0;
+		app.nearestLocation = data.results[0].location;
+		var i;
+		var param;
+		var un;
+		var val;
+		for(i=0; i < data.results[0].measurements.length; i++){
+			param = data.results[0].measurements[i].parameter;
+			val = data.results[0].measurements[i].value;
+			un = data.results[0].measurements[i].unit;
+			app.searchResults.push( {parameter: param, value: val, unit: un});
+			
+		}
+	}
+
+}
+
