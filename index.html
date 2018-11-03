@@ -40,6 +40,13 @@
 </head>
 
 <body onload="initMap()">
+	<!-- Warning Banner -->
+	<div id= "banner">
+		<span v-if="display===true">
+			<h4 style= "font-size: 150%;"> Warning! Particle levels are {{discription}}. </h4>
+		</span>
+	
+	</div>
 	<!-- Navagation Bar -->
 	<div class="navigationbar">
 		<!-- link to about section -->
@@ -69,6 +76,38 @@
 				
 	</div>
 	<!-- End of Search Bar -->
+	<!--Color Legend Table -->
+	<table id="legend">
+			<tr> 
+				<th> Color Legend </th>
+			</tr>
+			<tr>
+				<td style="background-color: rgb(0,228,0);"> </td>
+				<td> Good </td>
+			</tr>
+			<tr>
+				<td style="background-color: rgb(255,255,0);"> </td>
+				<td> Moderate </td>
+			</tr>
+			<tr>
+				<td style="background-color: rgb(255,126,0);"> </td>
+				<td> Unhealthy for Sensitive Groups </td>
+			</tr>
+			<tr>
+				<td style="background-color: rgb(255,0,0);"> </td>
+				<td> Unhealthy </td>
+			</tr>
+			<tr>
+				<td style="background-color: rgb(143,63,151);"> </td>
+				<td> Very Unhealthy </td>
+			</tr>
+			<tr>
+				<td style="background-color: rgb(126,0,35);"> </td>
+				<td> Hazardous </td>
+			</tr>
+			
+		</table> 
+	<!-- End of Color Legend-->
 
 	<!-- Button for Fullscreen -->
 	<button id="fullButton" type="button">

@@ -17,8 +17,9 @@ html, body {
 	position: absolute;
 	float: right;
 	top: 24px;
-	margin-left: 75vw;
-	width: 25vw;
+	margin-left: 75%;
+	margin-top: 5vh; /*Added for banner */
+	width: 25%;
 	z-index:1000;
 	
 
@@ -39,8 +40,9 @@ html, body {
 {
 	position: absolute;
 	float: right;
-	margin-left: 75vw;
-	width: 25vw;
+	margin-left: 75%;
+	margin-top: 5vh; /*Added for banner*/
+	width: 25%;
 	height: 1.5rem;
 	background-color: #9370DB;
 	
@@ -90,7 +92,7 @@ h3
 	position: absolute;
 	float: right;
 	margin-left: 80vw;
-	margin-top: 90px;
+	margin-top: 16vh; /*90px;*/
 	width: 25vw;
 	z-index:1000;
 	text-decoration: underline;
@@ -100,8 +102,8 @@ h3
 #tableLocation{
 	position: absolute;
 	float: right;
-	margin-left: 78vw;
-	margin-top: 120px;
+	margin-left: 75vw;
+	margin-top: 20vh;/*120px;*/
 	width: 25vw;
 	z-index:1000;
 
@@ -110,21 +112,49 @@ h3
 #realTable{
 	position: absolute;
 	float: right;
-	margin-left: 75vw;
-	margin-top: 150px;
-	width: 25vw;
+	margin-left: 75%;
+	margin-top: 28vh;/*150px;*/
+	width: 25%;
 	z-index:1000;
-	/*background-color: #9370DB;*/
-	color: black;
+	background-color: black;
+	color: white;
+	font-size: 75%;
 	
 }
 
-th{
+#legend{
+	position: absolute;
+	float: right;
+	margin-left: 75%;
+	margin-top: 75vh; 
+	width: 25%;
+	font-size: 60%;
+	z-index:1000;
+	background-color: black;
+	color: white;
+	border: 1px solid gray;
+
+}
+
+.head{
 	text-decoration: underline;
+	color: white;
 }
 
 .tableData{
+	margin-left: 80vw;
 	
-	/*background-color: pink;*/
+}
+
+#banner{
+	position: absolute;
+	float: right;
+	margin-left: 75%; 
+	width: 25vw;
+	font-size: 50%;
+	z-index:1000;
+	background-color: white;
+	color: white;
+	height:5vh;
 	
 }

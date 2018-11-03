@@ -1,4 +1,5 @@
 var app;
+var app2;
 var myMap;
 var mapFullScreen;
 
@@ -30,6 +31,16 @@ function initMap() {
 	});
 
 	(new fullScreen).addTo(myMap);
+	
+	//Separate Vue app for the banner 
+	app2 = new Vue({
+	el: "#banner",
+	data: {
+		display: false,
+		discription: ""
+	}
+	
+	});
 
 	//Search box input will start with this by default
 	app = new Vue({
@@ -44,17 +55,100 @@ function initMap() {
 		
         },
 	  methods: {
+		  //Method used to change the background color of table data and banner for warning messages
 		  background: function (info){
-				  if(info.parameter === "pm10"){
-					  if(info.value > 0 && info.value < 55){
-						  
-						  return "background-color: "+ app.colors.green 
-					  }
+				  if(info.parameter === "pm10"){	
+					var back = pmTen(info);
+				  if(back === "rgb(255,126,0)" || back === "rgb(255,0,0)" || back === "rgb(143,63,151)" || back === "rgb(126,0,35)"){
+						app2.display = true;
+						changeBanner(back);
+					} //if orange, red, purple or maroon initiate the banner
+					if(back === "rgb(255,0,0)" || back=== "rgb(255,255,0)"){
+						var font = ";color: black"
+						return "background-color: " + back + font
+					} //if red or yellow  change the table data font to black 
+					else{
+						return "background-color: " + pmTen(info)
+					} //otherwise the table data font color will be white 					
 				  }
+				  else if(info.parameter === "no2"){
+					var back = noTwo(info);
+					if(back === "rgb(255,126,0)" || back === "rgb(255,0,0)" || back === "rgb(143,63,151)" || back === "rgb(126,0,35)"){
+						app2.display = true;
+						changeBanner(back);
+					}
+					if(back === "rgb(255,0,0)" || back=== "rgb(255,255,0)"){
+						var font = ";color: black"
+						return "background-color: " + back + font
+					}
+					else{
+						return "background-color: " + noTwo(info)
+					}	
+				  }
+				  else if(info.parameter === "so2"){
+					var back = soTwo(info);
+					if(back === "rgb(255,126,0)" || back === "rgb(255,0,0)" || back === "rgb(143,63,151)" || back === "rgb(126,0,35)"){
+						app2.display = true;
+						changeBanner(back);
+					}
+					if(back === "rgb(255,0,0)" || back=== "rgb(255,255,0)"){
+						var font = ";color: black"
+						return "background-color: " + back + font
+					}
+					else{
+						return "background-color: " + soTwo(info)
+					}	
+				  }
+				  else if(info.parameter === "co"){
+					var back = carbonMono(info);
+					if(back === "rgb(255,126,0)" || back === "rgb(255,0,0)" || back === "rgb(143,63,151)" || back === "rgb(126,0,35)"){
+						app2.display = true;
+						changeBanner(back);
+					}
+					if(back === "rgb(255,0,0)" || back=== "rgb(255,255,0)"){
+						var font = ";color: black"
+						return "background-color: " + back + font
+					}
+					else{
+						return "background-color: " + carbonMono(info)
+					}	
+				  }
+				  else if(info.parameter === "pm25"){
+					var back = pmTwoFive(info);
+					if(back === "rgb(255,126,0)" || back === "rgb(255,0,0)" || back === "rgb(143,63,151)" || back === "rgb(126,0,35)"){
+						app2.display = true;
+						changeBanner(back);
+					}
+					if(back === "rgb(255,0,0)" || back=== "rgb(255,255,0)"){
+						var font = ";color: black"
+						return "background-color: " + back + font
+					}
+					else{
+						return "background-color: " + pmTwoFive(info)
+					}	
+				  }
+				  
+				  else if(info.parameter === "o3"){
+					var back = oThree(info);
+					if(back === "rgb(255,126,0)" || back === "rgb(255,0,0)" || back === "rgb(143,63,151)" || back === "rgb(126,0,35)"){
+						app2.display = true;
+						changeBanner(back);
+					}
+					if(back === "rgb(255,0,0)" || back=== "rgb(255,255,0)"){
+						var font = ";color: black"
+						return "background-color: " + back + font
+					}
+					else{
+						return "background-color: " + oThree(info)
+					}	
+				  }
+				  
 				  else{
 					  
-					return "background-color: teal;"
+					return "background-color: white;"
 				  }
+				  
+				  
 		  }
 	  }
         
@@ -146,7 +240,6 @@ function mapSearch() {
 //Adds markers to the map
 function addMarkers(data) {
 
-	console.log(data);
 	var i;
 	var lat;
 	var lon;
@@ -194,15 +287,20 @@ function full(){ //Used to adjust styles when full screen button is toggled
 	var table = document.getElementById('realTable');
 	var tableTit = document.getElementById('tableTitle');
 	var tableHed = document.getElementById('tableLocation');
+	var leg = document.getElementById('legend');
+	var ban = document.getElementById('banner');
 	if(mapFullScreen === false){
 		
 		var mapContainer = document.getElementById('map');
 		table.style.zIndex = '0';
 		tableTit.style.zIndex = '0';
 		tableHed.style.zIndex = '0';
+		leg.style.zIndex = '0';
+		ban.style.zIndex='0';
 		mapContainer.style.width = '100%';
 		mapFullScreen = true;
 		textBox.style.top= "0px";
+		textBox.style.marginTop = "0px";
 	}
 	else{
 		
@@ -210,9 +308,12 @@ function full(){ //Used to adjust styles when full screen button is toggled
 		table.style.zIndex= '1000';
 		tableTit.style.zIndex= '1000';
 		tableHed.style.zIndex= '1000';
+		leg.style.zIndex= '1000';
+		ban.style.zIndex= '1000';
 		mapContainer.style.width = '75%';
 		mapFullScreen = false;
 		textBox.style.top = "24px";
+		textBox.style.marginTop = "5vh";
 	}
 
 }
@@ -259,7 +360,12 @@ function requestUpdate(){
 	 
 
 }
+
 function updateTable(data){
+	app2.display = false; //Returns banner to invisible each time moved/updated
+	var bann = document.getElementById('banner');
+	bann.style.backgroundColor = "white"; 
+	
 	if (data.results.length > 0){
 		app.searchResults.length = 0;
 		app.nearestLocation = data.results[0].location;
@@ -271,10 +377,207 @@ function updateTable(data){
 			param = data.results[0].measurements[i].parameter;
 			val = data.results[0].measurements[i].value;
 			un = data.results[0].measurements[i].unit;
-			app.searchResults.push( {parameter: param, value: val, unit: un});
+			if(app.searchResults.length < 10){
+				app.searchResults.push( {parameter: param, value: val, unit: un});
+			} //Some of the GET values from the latest request have many repeated measurements, dont post in table if more than 10
 			
 		}
 	}
 
+}
+
+/* The following functions are used to style the background color of certain elements in the table*/
+//For particle pm10
+function pmTen(data){
+	  if(data.value <= 54){
+			return app.colors.green
+	  }
+	
+	  else if(data.value > 54 && data.value <= 154){
+			return app.colors.yellow
+	  }
+	  
+	  else if(data.value > 154 && data.value <= 254){
+			return app.colors.orange
+	  }
+	  else if(data.value > 254 && data.value <= 354){
+			return app.colors.red
+	  }
+	  else if(data.value > 354 && data.value <= 424){
+			return app.colors.purple
+	  }
+	   else if(data.value > 424){
+			return app.colors.maroon
+	  }
+
+		
+}
+//For particle no2
+function noTwo(data){
+	
+	if(data.value <= 53){
+			return app.colors.green
+	  }
+	
+	  else if(data.value > 53 && data.value <= 100){
+			return app.colors.yellow
+	  }
+	  
+	  else if(data.value > 100 && data.value <= 360){
+			return app.colors.orange
+	  }
+	  else if(data.value > 360 && data.value <= 649){
+			return app.colors.red
+	  }
+	  else if(data.value > 649 && data.value <= 1249){
+			return app.colors.purple
+	  }
+	   else if(data.value > 1249){
+			return app.colors.maroon
+	  }
+	
+}
+//For particle so2
+function soTwo(data){
+	
+	if(data.value <= 35){
+			return app.colors.green
+	  }
+	
+	  else if(data.value > 35 && data.value <= 75){
+			return app.colors.yellow
+	  }
+	  
+	  else if(data.value > 75 && data.value <= 185){
+			return app.colors.orange
+	  }
+	  else if(data.value > 185 && data.value <= 304){
+			return app.colors.red
+	  }
+	  else if(data.value > 304 && data.value <= 604){
+			return app.colors.purple
+	  }
+	   else if(data.value > 604){
+			return app.colors.maroon
+	  }
+	
+}
+//For particle co
+function carbonMono(data){
+	
+	if(data.value <= 4.4){
+			return app.colors.green
+	  }
+	
+	  else if(data.value > 4.4 && data.value <= 9.4){
+			return app.colors.yellow
+	  }
+	  
+	  else if(data.value > 9.4 && data.value <= 12.4){
+			return app.colors.orange
+	  }
+	  else if(data.value > 12.4 && data.value <= 15.4){
+			return app.colors.red
+	  }
+	  else if(data.value > 15.4 && data.value <= 30.4){
+			return app.colors.purple
+	  }
+	   else if(data.value > 30.4){
+			return app.colors.maroon
+	  }
+	
+}
+
+//For particle pm25
+function pmTwoFive(data){
+	
+	if(data.value <= 12.0){
+			return app.colors.green
+	  }
+	
+	  else if(data.value > 12.0 && data.value <= 35.4){
+			return app.colors.yellow
+	  }
+	  
+	  else if(data.value > 35.4 && data.value <= 55.4){
+			return app.colors.orange
+	  }
+	  else if(data.value > 55.4 && data.value <= 150.4){
+			return app.colors.red
+	  }
+	  else if(data.value > 150.4 && data.value <= 250.4){
+			return app.colors.purple
+	  }
+	   else if(data.value > 250.4){
+			return app.colors.maroon
+	  }
+	
+}
+//For particle o3
+function oThree(data){
+	
+	if(data.value <= 0.054){
+			return app.colors.green
+	  }
+	
+	  else if(data.value > 0.054 && data.value <= 0.070){
+			return app.colors.yellow
+	  }
+	  
+	  else if(data.value > 0.070 && data.value <= 0.085){
+			return app.colors.orange
+	  }
+	  else if(data.value > 0.085 && data.value <= 0.105){
+			return app.colors.red
+	  }
+	  else if(data.value > 0.105 && data.value <= 0.200){
+			return app.colors.purple
+	  }
+	   else if(data.value > 0.200){
+			return app.colors.maroon
+	  }
+	
+}
+
+/*The changeBanner function get a call when a table data row is either orange, red, purple or maroon. The table updates which banner to represent
+on the screen based on the other particle levels. For example, if there is both a hazardous level particle and a unhealthy level particle in
+a city, the function will return the hazardous banner since it is more dangerous.*/
+function changeBanner(data){
+	var bann = document.getElementById('banner');
+	
+	if(data === "rgb(126,0,35)"){
+		bann.style.backgroundColor = "rgb(126,0,35)";
+		app2.discription = 'hazardous';
+	}
+	else if(data === "rgb(143,63,151)"){
+		if(bann.style.backgroundColor !== "rgb(126, 0, 35)"){
+			bann.style.backgroundColor = "rgb(143,63,151)";
+			app2.discription = 'very unhealthy';
+		}
+	}
+	else if(data === "rgb(255,0,0)"){
+		if(bann.style.backgroundColor !== "rgb(126, 0, 35)"){
+			if(bann.style.backgroundColor !== "rgb(143, 63, 151)"){
+				bann.style.backgroundColor = "rgb(255,0,0)";
+				app2.discription = 'unhealthy';
+			}
+		}
+	}
+	
+	else{
+		if(bann.style.backgroundColor !== "rgb(126, 0, 35)"){
+			if(bann.style.backgroundColor !== "rgb(143, 63, 151)"){
+				if(bann.style.backgroundColor !== "rgb(255, 0, 0)"){
+					bann.style.backgroundColor = "rgb(255,126,0)";
+					app2.discription = 'unhealthy for sensitive groups';
+				}
+			}
+		}
+		
+		
+	}
+	
+	
+	
 }
 
