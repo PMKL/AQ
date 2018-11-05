@@ -116,11 +116,41 @@ h3 {
 
 }
 
+#type{ 
+	position: absolute;
+	float: right;
+	margin-left: 75vw;
+	margin-top: 26vh;
+	/*120px;*/
+	width: 25vw;
+	z-index: 1000;
+	
+}/* push */
+#type2{ 
+	position: absolute;
+	float: right;
+	margin-left: 75vw;
+	margin-top: 30vh;
+	width: 5vw;
+	z-index: 1000;
+	
+}/* push */
+
+#specificBox{ 
+	position: absolute;
+	float: right;
+	margin-left: 81vw;
+	margin-top: 30vh;
+	width: 10vw;
+	z-index: 1000;
+	
+}/* push*/
+
 #realTable {
 	position: absolute;
 	float: right;
 	margin-left: 75%;
-	margin-top: 28vh;
+	margin-top: 34vh; /* push before was 28vh*/
 	/*150px;*/
 	width: 25%;
 	z-index: 1000;
@@ -190,3 +220,4 @@ h3 {
 	padding-left: 5px;
 	padding-right: 5px;
 }
+

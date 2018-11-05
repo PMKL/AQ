@@ -66,6 +66,18 @@
 
 		<h4 id="tableTitle"> Air Quality Measurements </h4>
 		<h5 id="tableLocation"> Nearest Measurement: {{nearestLocation}} </h5>
+		
+		<select id="type" v-model="filter_type" onchange= "requestUpdate()">  <!-- Used to filter by specific parameter -->
+            <option v-for="option in filter_type_options" :value="option.value">{{ option.text }}</option> 
+        </select> 
+		
+		<span v-if="filter_type != 'all'"> <!-- Show these in the webpage if user wants to filter -->
+			<select id="type2" v-model="filter_sign" onchange= "requestUpdate()">  
+				<option v-for="option2 in filter_specifics_options" :value="option2.value">{{ option2.text }}</option> 
+			</select> 
+			<input id="specificBox" type="text" v-model="filter_amount" v-on:keyup.enter="requestUpdate()"></input>
+		</span>
+		
 		<table id="realTable">
 			<tr>
 				<th> Parameters </th>
