@@ -355,7 +355,6 @@ function requestUpdate() {
 
 //-----------------------//
 
-//
 function updateTable(data) {
 	app2.display = false;
 	//Returns banner to invisible each time moved/updated

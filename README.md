@@ -1,9 +1,11 @@
 Air Quality Web App
 ===================
 
-Due: `Nov 7 by 3:25pm`
-Points: `75`
-Submission: `Website url`
+
+>Due: Nov 7 by 3:25pm
+>Points: 75
+>Submission: Website url
+
  
 Task
 ===================
@@ -11,13 +13,16 @@ Task
 
 About the Data Sets
 ===================
+
 **Leaflet**:
   The Leaflet API allows you to render interactive maps in your web page as well as overlay data on top of the map. The map can be modified either by user interaction or by JavaScript commands.
+  
 **Open AQ Platform**:
   The Open AQ Platform maintains a rolling 90 day historical data set of air quality measures (i.e. everything from today back until 90 days ago). The data set includes information about locations where measurements exist (and how many measurements were taken), measurements of different particles in the air (carbon monoxide, sulfur dioxide, etc.), and timestamps for when measurements were taken.
 
 Grading Rubric (75 pts)
 ===================
+
 **To earn 55/75 points (grade: C)**
   * | **3 / 3** | **Show a map** using the Leaflet API
     1. Pan and zoom available with mouse click-and-drag and scroll wheel interaction 
@@ -34,16 +39,22 @@ Grading Rubric (75 pts)
     2. Description of the tools (frameworks, APIs, etc.) you used to create the application
     3. Video demo of the application (2 - 4 minutes)
       * Can natively embed or upload to YouTube and embed
-***NOTE***: it is best to trigger updates at the **end of user interaction**. Otherwise, continuous requests will be sent and could flood the Open AQ Platform servers, which would slow down your app. Perhaps trigger update after a 200ms timeout with no user activity (pan / zoom).
+	  
+***NOTE***: 
+
+It is best to trigger updates at the **end of user interaction**. Otherwise, continuous requests will be sent and could flood the Open AQ Platform servers, which would slow down your app. Perhaps trigger update after a 200ms timeout with no user activity (pan / zoom).
 
 **+ 4 additional points for each item completed on the list below**
-  * | **1 / 3**| Create **UI controls** to filter data
+
+  * | **2 / 3**| Create **UI controls** to filter data
     1. Filter based on particle type
     2. Filter based on measurement values for each particle type (e.g. only show co > 1.3, ammonia > 72.9, ...)
     3. Allow historical data to be retrieved (select a date/time within the last 90 days)
+	
   * | **2 / 2** | Use Location IQ API (https://locationiq.com/) to search via place name in addition to lat/long coordinates
     * Also update search box location to location name when panning the map
-  * | ***3 / 3*** | Style the background color of particle values in the table so they match the Air Quality Index from the EPA
+	
+  * | **3 / 3** | Style the background color of particle values in the table so they match the Air Quality Index from the EPA
     1. https://airnowtest.epa.gov/sites/default/files/2018-09/aqi-technical-assistance-document-sept-2018_0.pdf  (colors - page 2, values - page 4)
     2. If levels of one or more particle are "Unhealthy for Sensitive Groups" (orange), add a banner with the AQI descriptor (page 2)
     3. Also include a legend for the colors
@@ -52,8 +63,10 @@ Grading Rubric (75 pts)
     1. Color should represent the measurement value
     2. Include an easy-to-read legend
     3. Do **NOT** use a rainbow color scale
-    4. See Leaflet plugin: https://github.com/Leaflet/Leaflet.heat  
-  * | ***1/1*** | Allow map (along with the location input box) to go **fullscreen**
+    4. See Leaflet plugin: https://github.com/Leaflet/Leaflet.heat
+	
+	
+  * | **1 / 1** | Allow map (along with the location input box) to go **fullscreen**
 
 Submission
 ===================

@@ -4,6 +4,7 @@
 	width: 75%;
 }
 
+
 html,
 body {
 	height: 100%;
@@ -21,8 +22,6 @@ body {
 	/*Added for banner */
 	width: 25%;
 	z-index: 1000;
-
-
 }
 
 #fullButton {
