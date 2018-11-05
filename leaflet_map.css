@@ -1,31 +1,31 @@
-
- 
- /*Map and Table CSS Styles*/
+/*Map and Table CSS Styles*/
 #map {
-  height: 100%;
-  width: 75%;
+	height: 100%;
+	width: 75%;
 }
 
-html, body {
-  height: 100%;
-  margin: 0;
-  padding: 0;
+html,
+body {
+	height: 100%;
+	margin: 0;
+	padding: 0;
 }
 
 
-#textBox{
+#textBox {
 	position: absolute;
 	float: right;
 	top: 24px;
 	margin-left: 75%;
-	margin-top: 5vh; /*Added for banner */
+	margin-top: 5vh;
+	/*Added for banner */
 	width: 25%;
-	z-index:1000;
-	
+	z-index: 1000;
+
 
 }
 
-#fullButton{
+#fullButton {
 	margin-top: 25px;
 	color: white;
 	text-transform: uppercase;
@@ -36,125 +36,157 @@ html, body {
 	border: none;
 }
 
-.navigationbar
-{
+.navigationbar {
 	position: absolute;
 	float: right;
 	margin-left: 75%;
-	margin-top: 5vh; /*Added for banner*/
+	margin-top: 5vh;
+	/*Added for banner*/
 	width: 25%;
 	height: 1.5rem;
 	background-color: #9370DB;
-	
+
 }
 
-.navigationlinks
-{
-
+.navigationlinks {
+	font-family: Arial;
 	padding: 5vw;
-	color: white;	
-	
+	color: white;
+
 }
 
 /*CSS styles used in aboutProject page*/
-#aboutNavigation
-{
+#aboutNavigation {
 	width: 100%;
 	height: 2rem;
-	position: fixed;
+	padding-top: 1rem;
+	position: absolute;
 	background-color: #9370DB;
 	text-align: center;
-	
+
 }
 
-#personalphoto
-{
+#personalphoto {
 	float: left;
 	width: 150px;
 	height: 200px;
 	padding: 1rem 2rem 3rem 1rem;
-	
+
 }
 
-h1{
-	text-align: center;
-	font: italic bold 150% "Times New Roman", sans-serif;
+#personalphoto2 {
+	float: left;
+	width: 150px;
+	padding: 1rem 2rem 3rem 1rem;
+
 }
-h3
-{
+
+h1 {
+	text-align: center;
+	font: bold 150% "Times New Roman", sans-serif;
+}
+
+h3 {
 	font: italic bold 100% "Times New Roman", sans-serif;
 	text-decoration: underline;
-	
+
 }
 
 
-#tableTitle{ 
+#tableTitle {
 	position: absolute;
 	float: right;
 	margin-left: 80vw;
-	margin-top: 16vh; /*90px;*/
+	margin-top: 16vh;
+	/*90px;*/
 	width: 25vw;
-	z-index:1000;
+	z-index: 1000;
 	text-decoration: underline;
-	
+
 }
 
-#tableLocation{
+#tableLocation {
 	position: absolute;
 	float: right;
 	margin-left: 75vw;
-	margin-top: 20vh;/*120px;*/
+	margin-top: 20vh;
+	/*120px;*/
 	width: 25vw;
-	z-index:1000;
+	z-index: 1000;
 
 }
 
-#realTable{
+#realTable {
 	position: absolute;
 	float: right;
 	margin-left: 75%;
-	margin-top: 28vh;/*150px;*/
+	margin-top: 28vh;
+	/*150px;*/
 	width: 25%;
-	z-index:1000;
+	z-index: 1000;
 	background-color: black;
 	color: white;
 	font-size: 75%;
-	
+
 }
 
-#legend{
+#legend {
 	position: absolute;
 	float: right;
 	margin-left: 75%;
-	margin-top: 75vh; 
+	margin-top: 75vh;
 	width: 25%;
 	font-size: 60%;
-	z-index:1000;
+	z-index: 1000;
 	background-color: black;
 	color: white;
 	border: 1px solid gray;
 
 }
 
-.head{
+.head {
 	text-decoration: underline;
 	color: white;
 }
 
-.tableData{
+.tableData {
 	margin-left: 80vw;
-	
+
 }
 
-#banner{
+#banner {
 	position: absolute;
 	float: right;
-	margin-left: 75%; 
+	margin-left: 75%;
 	width: 25vw;
 	font-size: 50%;
-	z-index:1000;
+	z-index: 1000;
 	background-color: white;
 	color: white;
-	height:5vh;
-	
+	height: 5vh;
+
+}
+
+.Table {
+	display: table;
+}
+
+.Title {
+	display: table-caption;
+	text-align: center;
+	font-weight: bold;
+	font-size: larger;
+}
+
+.Row {
+	display: table-row;
+}
+
+.Cell {
+	display: table-cell;
+	min-width: 42rem;
+	border: solid;
+	border-width: thin;
+	padding-left: 5px;
+	padding-right: 5px;
 }

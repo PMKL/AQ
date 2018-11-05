@@ -19,17 +19,17 @@ About the Data Sets
 Grading Rubric (75 pts)
 ===================
 **To earn 55/75 points (grade: C)**
-  * | **1 / 3** |**Show a map** using the Leaflet API
+  * | **3 / 3** | **Show a map** using the Leaflet API
     1. Pan and zoom available with mouse click-and-drag and scroll wheel interaction 
     2. Have an input box for a user to type a location (lat/long coordinates)
       * Map should update when location is entered
       * Input box text should update with new location (lat/long coordinates) when map is panned
     3. Draw markers on the map at the location of each measurement
       * Create a popup with actual measurement data when hovering over a marker
-  * **Populate** a table with most up-to-date air quality measurements (from the Open AQ Platform API)
+  * | **2 / 2** | **Populate** a table with most up-to-date air quality measurements (from the Open AQ Platform API)
     * Table should automatically update data based on location shown in map
       * Should account for both center and zoom level
-  * Create an "**About the Project**" page
+  * | **2 / 3**| Create an "**About the Project**" page
     1. Short bio about each team member (including a photo)
     2. Description of the tools (frameworks, APIs, etc.) you used to create the application
     3. Video demo of the application (2 - 4 minutes)
@@ -37,13 +37,13 @@ Grading Rubric (75 pts)
 ***NOTE***: it is best to trigger updates at the **end of user interaction**. Otherwise, continuous requests will be sent and could flood the Open AQ Platform servers, which would slow down your app. Perhaps trigger update after a 200ms timeout with no user activity (pan / zoom).
 
 **+ 4 additional points for each item completed on the list below**
-  * Create **UI controls** to filter data
+  * | **1 / 3**| Create **UI controls** to filter data
     1. Filter based on particle type
     2. Filter based on measurement values for each particle type (e.g. only show co > 1.3, ammonia > 72.9, ...)
     3. Allow historical data to be retrieved (select a date/time within the last 90 days)
-  * Use Location IQ API (https://locationiq.com/) to search via place name in addition to lat/long coordinates
+  * | **2 / 2** | Use Location IQ API (https://locationiq.com/) to search via place name in addition to lat/long coordinates
     * Also update search box location to location name when panning the map
-  * Style the background color of particle values in the table so they match the Air Quality Index from the EPA
+  * | ***3 / 3*** | Style the background color of particle values in the table so they match the Air Quality Index from the EPA
     1. https://airnowtest.epa.gov/sites/default/files/2018-09/aqi-technical-assistance-document-sept-2018_0.pdf  (colors - page 2, values - page 4)
     2. If levels of one or more particle are "Unhealthy for Sensitive Groups" (orange), add a banner with the AQI descriptor (page 2)
     3. Also include a legend for the colors
@@ -53,7 +53,7 @@ Grading Rubric (75 pts)
     2. Include an easy-to-read legend
     3. Do **NOT** use a rainbow color scale
     4. See Leaflet plugin: https://github.com/Leaflet/Leaflet.heat  
-  * Allow map (along with the location input box) to go **fullscreen**
+  * | ***1/1*** | Allow map (along with the location input box) to go **fullscreen**
 
 Submission
 ===================

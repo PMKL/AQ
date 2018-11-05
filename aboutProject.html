@@ -1,29 +1,85 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-    <meta charset="utf-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1"/>
-    <title>About the Authors</title>
-	<link rel="stylesheet" href="leaflet_map.css"/>
-	
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<title>About the Authors</title>
+
+	<link rel="stylesheet" href="leaflet_map.css" />
+
 </head>
 
 <body>
+	<!-- Nav bar -->
+	<div id="aboutNavigation">
+		<a class="navigationlinks" href="index.html" target="_self"> Air Quality Map </a>
+	</div>
+	<!-- end of nav. -->
 
-<div id= "aboutNavigation">	
-		<a  class= "navigationlinks" href="index.html" target="_self"> Content </a>
-</div>
-<br><br>
-<h1> About the Website <h1/>
-	
-<img id="personalphoto" src= "linhardtPhoto.jpg" alt = "Picture of Author" />
+	<br><br>
 
-<h3> <i> Biographies <i> </h3>
-		<p> Hello! My name is Christian Linhardt and I am a senior at the University of St. Thomas. 
-			I am an accounting major and computer science minor and am pursuing a career in Technology Audit. 
-			I love nature and hiking, my goal is to visit every national park.</p>
+	<!-- Start of about page, body-->
+	<div class="Table">
+		<div class="Title">
+			<h1> <b>About the Website</b>
+			</h1>
+		</div>
+		<!-- Row one for images -->
+		<div id="Row">
+			<div class="Cell">
+				<img id="personalphoto" src="linhardtPhoto.jpg" alt="Picture of Christian" />
+			</div>
 
-	
+			<div class="Cell">
+				<img id="personalphoto2" src="pmkl.png" alt="Picture of Luis" />
+			</div>
+		</div>
+		<!-- Row Two, Our Backgorunds-->
+		<div class="Rows">
+			<div class="Cell">
+				<p>
+					Hello! My name is <b>Christian Linhardt</b> and I am a senior at the University of St. Thomas.
+				</p>
+				<p>
+					I am an accounting major and computer science minor and am pursuing a career in Technology Audit.
+				</p>
+				<p>
+					I love nature and hiking, my goal is to visit every national park.
+				</p>
+			</div>
+			<div class="Cell">
+				<p> My name is <b>Luis Castellanos Jr.</b>, I am also a Senior at the University of St. Thomas.
+				</p>
+				<p>I am a Computer Information and Science major, and I am focused on both code development and video game design.
+				</p>
+				<p>I spend my time reading numerous fictions novels, going out for movies, and playing/developing video games.</p>
+			</div>
+		</div>
+
+		<!-- Row Three, Tools -->
+		<div class="Rows">
+			<div class="Cell">
+				<p>---- <b>What Tools did we use?</b> ----</p>
+
+				<p>
+					The page utilizes several API's, ranging from
+				</p>
+				<ul>
+					<li>Open Maps for map support.</li>
+					<li>MapBox for providing updating map tiles</li>
+					<li>LocationIQ for search box input/location name update</li>
+				</ul>
+			</div>
+			<!-- To add: Video Link -->
+			<div class="Cell">
+				<p>
+
+				</p>
+			</div>
+		</div>
+	</div>
+
 </body>
-</html>
 
+</html>

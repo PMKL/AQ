@@ -37,16 +37,22 @@
 	<!-- Map tile Script -->
 	<script src='Leaflet.markercluster-1.4.1\dist\leaflet.markercluster-src.js'> </script>
 
+	<!-- Heatmap Script -->
+	<script type="text/javascript" src="dist/leaflet-heat.js"></script>
+
+
 </head>
 
 <body onload="initMap()">
+
 	<!-- Warning Banner -->
-	<div id= "banner">
+	<div id="banner">
 		<span v-if="display===true">
-			<h4 style= "font-size: 150%;"> Warning! Particle levels are {{discription}}. </h4>
+			<h4 style="font-size: 150%;"> Warning! Particle levels are {{discription}}. </h4>
 		</span>
-	
 	</div>
+	<!-- end of banner -->
+
 	<!-- Navagation Bar -->
 	<div class="navigationbar">
 		<!-- link to about section -->
@@ -56,57 +62,57 @@
 
 	<!-- Search Bar -->
 	<div id="search">
-		<input id= "textBox" type="text"  v-model="map_search" v-bind:placeholder="input_placeholder" 
-			 v-on:keyup.enter="mapSearch()">  </input>
-		
-		<h4 id= "tableTitle"> Air Quality Measurements </h4>
-		<h5 id= "tableLocation"> Nearest Measurement:  {{nearestLocation}}   </h5>
-		<table id= "realTable">
+		<input id="textBox" type="text" v-model="map_search" v-bind:placeholder="input_placeholder" v-on:keyup.enter="mapSearch()"> </input>
+
+		<h4 id="tableTitle"> Air Quality Measurements </h4>
+		<h5 id="tableLocation"> Nearest Measurement: {{nearestLocation}} </h5>
+		<table id="realTable">
 			<tr>
 				<th> Parameters </th>
 				<th> Value </th>
 				<th> Unit </th>
 			</tr>
 			<tr v-for="item in searchResults" v-bind:style="background(item)">
-				<td class= "tableData"> {{item.parameter}} </td>
-				<td class= "tableData"> {{item.value}} </td>
-				<td class= "tableData"> {{item.unit}} </td>
+				<td class="tableData"> {{item.parameter}} </td>
+				<td class="tableData"> {{item.value}} </td>
+				<td class="tableData"> {{item.unit}} </td>
 			</tr>
 		</table>
-				
+
 	</div>
 	<!-- End of Search Bar -->
+
 	<!--Color Legend Table -->
 	<table id="legend">
-			<tr> 
-				<th> Color Legend </th>
-			</tr>
-			<tr>
-				<td style="background-color: rgb(0,228,0);"> </td>
-				<td> Good </td>
-			</tr>
-			<tr>
-				<td style="background-color: rgb(255,255,0);"> </td>
-				<td> Moderate </td>
-			</tr>
-			<tr>
-				<td style="background-color: rgb(255,126,0);"> </td>
-				<td> Unhealthy for Sensitive Groups </td>
-			</tr>
-			<tr>
-				<td style="background-color: rgb(255,0,0);"> </td>
-				<td> Unhealthy </td>
-			</tr>
-			<tr>
-				<td style="background-color: rgb(143,63,151);"> </td>
-				<td> Very Unhealthy </td>
-			</tr>
-			<tr>
-				<td style="background-color: rgb(126,0,35);"> </td>
-				<td> Hazardous </td>
-			</tr>
-			
-		</table> 
+		<tr>
+			<th> Color Legend </th>
+		</tr>
+		<tr>
+			<td style="background-color: rgb(0,228,0);"> </td>
+			<td> Good </td>
+		</tr>
+		<tr>
+			<td style="background-color: rgb(255,255,0);"> </td>
+			<td> Moderate </td>
+		</tr>
+		<tr>
+			<td style="background-color: rgb(255,126,0);"> </td>
+			<td> Unhealthy for Sensitive Groups </td>
+		</tr>
+		<tr>
+			<td style="background-color: rgb(255,0,0);"> </td>
+			<td> Unhealthy </td>
+		</tr>
+		<tr>
+			<td style="background-color: rgb(143,63,151);"> </td>
+			<td> Very Unhealthy </td>
+		</tr>
+		<tr>
+			<td style="background-color: rgb(126,0,35);"> </td>
+			<td> Hazardous </td>
+		</tr>
+
+	</table>
 	<!-- End of Color Legend-->
 
 	<!-- Button for Fullscreen -->
@@ -119,7 +125,6 @@
 	<div id="map">
 	</div>
 	<!-- End of Map -->
-
 </body>
 
 </html>
