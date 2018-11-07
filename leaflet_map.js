@@ -58,26 +58,59 @@ function initMap() {
 				purple: "rgb(143,63,151)",
 				maroon: "rgb(126,0,35)"
 			},
-			filter_type: "all", 
-            filter_type_options: [
-                { value: "all", text: "All" },
-                { value: "pm10", text: "pm10" },
-                { value: "pm25", text: "pm25" },
-                { value: "no2", text: "no2" },
-				{ value: "so2", text: "so2" },
-				{ value: "co", text: "co" },
-				{ value: "o3", text: "o3" }
-				
+			filter_type: "all",
+			filter_type_options: [
+				{
+					value: "all",
+					text: "All"
+				},
+				{
+					value: "pm10",
+					text: "pm10"
+				},
+				{
+					value: "pm25",
+					text: "pm25"
+				},
+				{
+					value: "no2",
+					text: "no2"
+				},
+				{
+					value: "so2",
+					text: "so2"
+				},
+				{
+					value: "co",
+					text: "co"
+				},
+				{
+					value: "o3",
+					text: "o3"
+				}
+
             ],
 			filter_sign: "-",
 			filter_amount: "0",
 			filter_specifics_options: [
-                { value: "=", text: "=" },
-                { value: ">", text: ">" },
-                { value: "<", text: "<" },
-				{ value: "-", text: "-" }
-					
-				
+				{
+					value: "=",
+					text: "="
+				},
+				{
+					value: ">",
+					text: ">"
+				},
+				{
+					value: "<",
+					text: "<"
+				},
+				{
+					value: "-",
+					text: "-"
+				}
+
+
             ]
 		},
 		methods: {
@@ -298,7 +331,7 @@ function addMarkers(data) {
 //------------------//
 
 //Used to adjust styles when full screen button is toggled
-function full(){ //Used to adjust styles when full screen button is toggled
+function full() { //Used to adjust styles when full screen button is toggled
 	var textBox = document.getElementById('textBox');
 	var table = document.getElementById('realTable');
 	var tableTit = document.getElementById('tableTitle');
@@ -308,38 +341,37 @@ function full(){ //Used to adjust styles when full screen button is toggled
 	var filter = document.getElementById('type');
 	var filter2 = document.getElementById('type2');
 	var filterReq = document.getElementById('specificBox');
-	if(mapFullScreen === false){
-		
+	if (mapFullScreen === false) {
+
 		var mapContainer = document.getElementById('map');
 		table.style.zIndex = '0';
 		tableTit.style.zIndex = '0';
 		tableHed.style.zIndex = '0';
 		leg.style.zIndex = '0';
-		ban.style.zIndex='0';
-		filter.style.zIndex= '0'; 
-		if(filter2 && filterReq != null){
-			filter2.style.zIndex= '0'; 
-			filterReq.style.zIndex = '0'; 
+		ban.style.zIndex = '0';
+		filter.style.zIndex = '0';
+		if (filter2 && filterReq != null) {
+			filter2.style.zIndex = '0';
+			filterReq.style.zIndex = '0';
 		}
 		mapContainer.style.width = '100%';
 		mapFullScreen = true;
-		textBox.style.top= "0px";
+		textBox.style.top = "0px";
 		textBox.style.marginTop = "0px";
 
-	}
-	else{
-		
+	} else {
+
 		var mapContainer = document.getElementById('map');
-		filter.style.zIndex = '1000'; 
-		if(filter2 && filterReq != null){
-			filter2.style.zIndex= '1000'; 
-			filterReq.style.zIndex = '1000'; 
+		filter.style.zIndex = '1000';
+		if (filter2 && filterReq != null) {
+			filter2.style.zIndex = '1000';
+			filterReq.style.zIndex = '1000';
 		}
-		table.style.zIndex= '1000';
-		tableTit.style.zIndex= '1000';
-		tableHed.style.zIndex= '1000';
-		leg.style.zIndex= '1000';
-		ban.style.zIndex= '1000';
+		table.style.zIndex = '1000';
+		tableTit.style.zIndex = '1000';
+		tableHed.style.zIndex = '1000';
+		leg.style.zIndex = '1000';
+		ban.style.zIndex = '1000';
 		mapContainer.style.width = '75%';
 		mapFullScreen = false;
 		textBox.style.top = "24px";
@@ -404,40 +436,50 @@ function updateTable(data) {
 		var param;
 		var un;
 		var val;
-		if(app.filter_type === 'all'){ //If 'all' dont need any more specifics
-			for(i=0; i < data.results[0].measurements.length; i++){
+		if (app.filter_type === 'all') { //If 'all' dont need any more specifics
+			for (i = 0; i < data.results[0].measurements.length; i++) {
 				param = data.results[0].measurements[i].parameter;
 				val = data.results[0].measurements[i].value;
 				un = data.results[0].measurements[i].unit;
-				if(app.searchResults.length < 10){
-					app.searchResults.push( {parameter: param, value: val, unit: un});
+				if (app.searchResults.length < 10) {
+					app.searchResults.push({
+						parameter: param,
+						value: val,
+						unit: un
+					});
 				} //Some of the GET values from the latest request have many repeated measurements, dont post in table if more than 10
-			
+
 			}
-		} 
-		else{
-			for(i=0; i < data.results[0].measurements.length; i++){
+		} else {
+			for (i = 0; i < data.results[0].measurements.length; i++) {
 				param = data.results[0].measurements[i].parameter;
 				val = data.results[0].measurements[i].value;
 				un = data.results[0].measurements[i].unit;
-				if(app.searchResults.length < 10){
-					if(param === app.filter_type){ 
-						if(app.filter_sign === '-'){ // if just filtering based on parameter type dont need more specifics 
-							app.searchResults.push( {parameter: param, value: val, unit: un});
-						}
-						else{
+				if (app.searchResults.length < 10) {
+					if (param === app.filter_type) {
+						if (app.filter_sign === '-') { // if just filtering based on parameter type dont need more specifics 
+							app.searchResults.push({
+								parameter: param,
+								value: val,
+								unit: un
+							});
+						} else {
 							var isTrue;
 							isTrue = specificValue(val);
-							if(isTrue === true){
-								app.searchResults.push( {parameter: param, value: val, unit: un});
+							if (isTrue === true) {
+								app.searchResults.push({
+									parameter: param,
+									value: val,
+									unit: un
+								});
 							} //otherwise we need to test if the specific parameter has the correct value type
 						}
-					} 
+					}
 				} //Some of the GET values from the latest request have many repeated measurements, dont post in table if more than 10
-			
+
 			} //for(i=0; i < data.results[0].measurements.length; i++)
 		} //else
-	}//if(data.results.length > 0)
+	} //if(data.results.length > 0)
 
 } //updateTable(data)
 // End of updateTable
@@ -446,301 +488,210 @@ function updateTable(data) {
 
 /* The following functions are used to style the background color of certain elements in the table*/
 //For particle pm10
-function pmTen(data){
-	  if(data.value <= 54){
-			return app.colors.green
-	  }
-	
-	  else if(data.value > 54 && data.value <= 154){
-			return app.colors.yellow
-	  }
-	  
-	  else if(data.value > 154 && data.value <= 254){
-			return app.colors.orange
-	  }
-	  else if(data.value > 254 && data.value <= 354){
-			return app.colors.red
-	  }
-	  else if(data.value > 354 && data.value <= 424){
-			return app.colors.purple
-	  }
-	   else if(data.value > 424){
-			return app.colors.maroon
-	  }
+function pmTen(data) {
+	if (data.value <= 54) {
+		return app.colors.green
+	} else if (data.value > 54 && data.value <= 154) {
+		return app.colors.yellow
+	} else if (data.value > 154 && data.value <= 254) {
+		return app.colors.orange
+	} else if (data.value > 254 && data.value <= 354) {
+		return app.colors.red
+	} else if (data.value > 354 && data.value <= 424) {
+		return app.colors.purple
+	} else if (data.value > 424) {
+		return app.colors.maroon
+	}
 
-		
+
 }
 
-function noTwo(data){
-	if(data.unit === "ppb"){
-		if(data.value <= 53){
+function noTwo(data) {
+	if (data.unit === "ppb") {
+		if (data.value <= 53) {
 			return app.colors.green
-		}
-	
-		else if(data.value > 53 && data.value <= 100){
+		} else if (data.value > 53 && data.value <= 100) {
 			return app.colors.yellow
-		}
-	  
-		else if(data.value > 100 && data.value <= 360){
+		} else if (data.value > 100 && data.value <= 360) {
 			return app.colors.orange
-		}
-		else if(data.value > 360 && data.value <= 649){
+		} else if (data.value > 360 && data.value <= 649) {
 			return app.colors.red
-		}
-		else if(data.value > 649 && data.value <= 1249){
+		} else if (data.value > 649 && data.value <= 1249) {
 			return app.colors.purple
-		}
-		else if(data.value > 1249){
+		} else if (data.value > 1249) {
 			return app.colors.maroon
 		}
-	}
-	else if(data.unit === "ppm"){
+	} else if (data.unit === "ppm") {
 		var newVal = (data.value * 1000);
-		if(newVal <= 53){
+		if (newVal <= 53) {
 			return app.colors.green
-		}
-	
-		else if(newVal > 53 && newVal <= 100){
+		} else if (newVal > 53 && newVal <= 100) {
 			return app.colors.yellow
-		}
-	  
-		else if(newVal > 100 && newVal <= 360){
+		} else if (newVal > 100 && newVal <= 360) {
 			return app.colors.orange
-		}
-		else if(newVal > 360 && newVal <= 649){
+		} else if (newVal > 360 && newVal <= 649) {
 			return app.colors.red
-		}
-		else if(newVal > 649 && newVal <= 1249){
+		} else if (newVal > 649 && newVal <= 1249) {
 			return app.colors.purple
-		}
-		else if(newVal > 1249){
+		} else if (newVal > 1249) {
 			return app.colors.maroon
 		}
-		
-	}
-	else if(data.unit === "µg/m³"){
+
+	} else if (data.unit === "µg/m³") {
 		var newVal = (data.value * 0.001);
-		if(newVal <= 53){
+		if (newVal <= 53) {
 			return app.colors.green
-		}
-	
-		else if(newVal > 53 && newVal <= 100){
+		} else if (newVal > 53 && newVal <= 100) {
 			return app.colors.yellow
-		}
-	  
-		else if(newVal > 100 && newVal <= 360){
+		} else if (newVal > 100 && newVal <= 360) {
 			return app.colors.orange
-		}
-		else if(newVal > 360 && newVal <= 649){
+		} else if (newVal > 360 && newVal <= 649) {
 			return app.colors.red
-		}
-		else if(newVal > 649 && newVal <= 1249){
+		} else if (newVal > 649 && newVal <= 1249) {
 			return app.colors.purple
-		}
-		else if(newVal > 1249){
+		} else if (newVal > 1249) {
 			return app.colors.maroon
 		}
-		
-		
+
+
 	}
-	
+
 }
 
-function soTwo(data){
-	if(data.unit === "ppb"){
-		if(data.value <= 35){
+function soTwo(data) {
+	if (data.unit === "ppb") {
+		if (data.value <= 35) {
 			return app.colors.green
-		}
-	
-		else if(data.value > 35 && data.value <= 75){
+		} else if (data.value > 35 && data.value <= 75) {
 			return app.colors.yellow
-		}
-	  
-		else if(data.value > 75 && data.value <= 185){
+		} else if (data.value > 75 && data.value <= 185) {
 			return app.colors.orange
-		}
-		else if(data.value > 185 && data.value <= 304){
+		} else if (data.value > 185 && data.value <= 304) {
 			return app.colors.red
-		}
-		else if(data.value > 304 && data.value <= 604){
+		} else if (data.value > 304 && data.value <= 604) {
 			return app.colors.purple
-		}
-		else if(data.value > 604){
+		} else if (data.value > 604) {
 			return app.colors.maroon
 		}
-	}
-	else if(data.unit === "ppm"){
+	} else if (data.unit === "ppm") {
 		var newVal = (data.value * 1000);
-		if(newVal <= 35){
+		if (newVal <= 35) {
 			return app.colors.green
-		}
-	
-		else if(newVal > 35 && newVal <= 75){
+		} else if (newVal > 35 && newVal <= 75) {
 			return app.colors.yellow
-		}
-	  
-		else if(newVal > 75 && newVal <= 185){
+		} else if (newVal > 75 && newVal <= 185) {
 			return app.colors.orange
-		}
-		else if(newVal > 185 && newVal <= 304){
+		} else if (newVal > 185 && newVal <= 304) {
 			return app.colors.red
-		}
-		else if(newVal > 304 && newVal <= 604){
+		} else if (newVal > 304 && newVal <= 604) {
 			return app.colors.purple
-		}
-		else if(newVal > 604){
+		} else if (newVal > 604) {
 			return app.colors.maroon
 		}
-		
-	}
-	else if(data.unit === "µg/m³"){
+
+	} else if (data.unit === "µg/m³") {
 		var newVal = (data.value * 0.001);
-		if(newVal <= 35){
+		if (newVal <= 35) {
 			return app.colors.green
-		}
-	
-		else if(newVal > 35 && newVal <= 75){
+		} else if (newVal > 35 && newVal <= 75) {
 			return app.colors.yellow
-		}
-	  
-		else if(newVal > 75 && newVal <= 185){
+		} else if (newVal > 75 && newVal <= 185) {
 			return app.colors.orange
-		}
-		else if(newVal > 185 && newVal <= 304){
+		} else if (newVal > 185 && newVal <= 304) {
 			return app.colors.red
-		}
-		else if(newVal > 304 && newVal <= 604){
+		} else if (newVal > 304 && newVal <= 604) {
 			return app.colors.purple
-		}
-		else if(newVal > 604){
+		} else if (newVal > 604) {
 			return app.colors.maroon
 		}
-		
-		
+
+
 	}
 }
 
-function carbonMono(data){
-	if(data.unit === "ppm"){
-		if(data.value <= 4.4){
-				return app.colors.green
+function carbonMono(data) {
+	if (data.unit === "ppm") {
+		if (data.value <= 4.4) {
+			return app.colors.green
+		} else if (data.value > 4.4 && data.value <= 9.4) {
+			return app.colors.yellow
+		} else if (data.value > 9.4 && data.value <= 12.4) {
+			return app.colors.orange
+		} else if (data.value > 12.4 && data.value <= 15.4) {
+			return app.colors.red
+		} else if (data.value > 15.4 && data.value <= 30.4) {
+			return app.colors.purple
+		} else if (data.value > 30.4) {
+			return app.colors.maroon
 		}
-	
-		else if(data.value > 4.4 && data.value <= 9.4){
-				return app.colors.yellow
-		}
-	  
-		else if(data.value > 9.4 && data.value <= 12.4){
-				return app.colors.orange
-		}
-		else if(data.value > 12.4 && data.value <= 15.4){
-				return app.colors.red
-		}
-		else if(data.value > 15.4 && data.value <= 30.4){
-				return app.colors.purple
-		}
-	   else if(data.value > 30.4){
-				return app.colors.maroon
-		}
-	}
-	
-	else if(data.unit === "µg/m³"){
+	} else if (data.unit === "µg/m³") {
 		var newVal = (data.value * 0.000001);
-		if(newVal<= 4.4){
-				return app.colors.green
-		}
-	
-		else if(newVal > 4.4 && newVal <= 9.4){
-				return app.colors.yellow
-		}
-	  
-		else if(newVal > 9.4 && newVal <= 12.4){
-				return app.colors.orange
-		}
-		else if(newVal > 12.4 && newVal <= 15.4){
-				return app.colors.red
-		}
-		else if(newVal > 15.4 && newVal <= 30.4){
-				return app.colors.purple
-		}
-	   else if(newVal > 30.4){
-				return app.colors.maroon
+		if (newVal <= 4.4) {
+			return app.colors.green
+		} else if (newVal > 4.4 && newVal <= 9.4) {
+			return app.colors.yellow
+		} else if (newVal > 9.4 && newVal <= 12.4) {
+			return app.colors.orange
+		} else if (newVal > 12.4 && newVal <= 15.4) {
+			return app.colors.red
+		} else if (newVal > 15.4 && newVal <= 30.4) {
+			return app.colors.purple
+		} else if (newVal > 30.4) {
+			return app.colors.maroon
 		}
 	}
 }
 
 
-function pmTwoFive(data){
-	
-	if(data.value <= 12.0){
-			return app.colors.green
-	  }
-	
-	  else if(data.value > 12.0 && data.value <= 35.4){
-			return app.colors.yellow
-	  }
-	  
-	  else if(data.value > 35.4 && data.value <= 55.4){
-			return app.colors.orange
-	  }
-	  else if(data.value > 55.4 && data.value <= 150.4){
-			return app.colors.red
-	  }
-	  else if(data.value > 150.4 && data.value <= 250.4){
-			return app.colors.purple
-	  }
-	   else if(data.value > 250.4){
-			return app.colors.maroon
-	  }
-	
+function pmTwoFive(data) {
+
+	if (data.value <= 12.0) {
+		return app.colors.green
+	} else if (data.value > 12.0 && data.value <= 35.4) {
+		return app.colors.yellow
+	} else if (data.value > 35.4 && data.value <= 55.4) {
+		return app.colors.orange
+	} else if (data.value > 55.4 && data.value <= 150.4) {
+		return app.colors.red
+	} else if (data.value > 150.4 && data.value <= 250.4) {
+		return app.colors.purple
+	} else if (data.value > 250.4) {
+		return app.colors.maroon
+	}
+
 }
 
-function oThree(data){
-	if(data.unit === "ppm"){
-		if(data.value <= 0.054){
+function oThree(data) {
+	if (data.unit === "ppm") {
+		if (data.value <= 0.054) {
 			return app.colors.green
-		}
-	
-		else if(data.value > 0.054 && data.value <= 0.070){
+		} else if (data.value > 0.054 && data.value <= 0.070) {
 			return app.colors.yellow
-		}
-	  
-		else if(data.value > 0.070 && data.value <= 0.085){
+		} else if (data.value > 0.070 && data.value <= 0.085) {
 			return app.colors.orange
-		}
-		else if(data.value > 0.085 && data.value <= 0.105){
+		} else if (data.value > 0.085 && data.value <= 0.105) {
 			return app.colors.red
-		}
-		else if(data.value > 0.105 && data.value <= 0.200){
+		} else if (data.value > 0.105 && data.value <= 0.200) {
 			return app.colors.purple
-		}
-		else if(data.value > 0.200){
+		} else if (data.value > 0.200) {
 			return app.colors.maroon
 		}
-	}
-	else if(data.unit === "µg/m³"){
-		var newVal = (data.value *0.000001)
-		if(newVal <= 0.054){
+	} else if (data.unit === "µg/m³") {
+		var newVal = (data.value * 0.000001)
+		if (newVal <= 0.054) {
 			return app.colors.green
-		}
-	
-		else if(newVal > 0.054 && newVal <= 0.070){
+		} else if (newVal > 0.054 && newVal <= 0.070) {
 			return app.colors.yellow
-		}
-	  
-		else if(newVal > 0.070 && newVal <= 0.085){
+		} else if (newVal > 0.070 && newVal <= 0.085) {
 			return app.colors.orange
-		}
-		else if(newVal > 0.085 && newVal <= 0.105){
+		} else if (newVal > 0.085 && newVal <= 0.105) {
 			return app.colors.red
-		}
-		else if(newVal > 0.105 && newVal <= 0.200){
+		} else if (newVal > 0.105 && newVal <= 0.200) {
 			return app.colors.purple
-		}
-		else if(newVal > 0.200){
+		} else if (newVal > 0.200) {
 			return app.colors.maroon
 		}
-		
+
 	}
 }
 
@@ -777,31 +728,26 @@ function changeBanner(data) {
 	}
 }
 
-function specificValue(value){
+function specificValue(value) {
 	var sign = app.filter_sign;
-	if(sign === '='){
-		if(value === Number(app.filter_amount)){
+	if (sign === '=') {
+		if (value === Number(app.filter_amount)) {
 			return true;
-		}
-		else{
+		} else {
 			return false;
 		}
-	}
-	else if(sign === '>'){
-		
-		if(value > Number(app.filter_amount)){
-			
+	} else if (sign === '>') {
+
+		if (value > Number(app.filter_amount)) {
+
 			return true;
-		}
-		else{
+		} else {
 			return false;
 		}
-	}
-	else if(sign === '<'){
-		if(value < Number(app.filter_amount)){
+	} else if (sign === '<') {
+		if (value < Number(app.filter_amount)) {
 			return true;
-		}
-		else{
+		} else {
 			return false;
 		}
 	}
