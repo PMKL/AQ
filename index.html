@@ -56,7 +56,7 @@
 	<!-- Navagation Bar -->
 	<div class="navigationbar">
 		<!-- link to about section -->
-		<a class="navigationlinks" href="aboutProject.html" target="_self"> About the Authors </a>
+		<a class="navigationlinks" href="aboutProject.html" target="_self"> About the Developers </a>
 	</div>
 	<!-- End of Nav. -->
 
@@ -66,18 +66,20 @@
 
 		<h4 id="tableTitle"> Air Quality Measurements </h4>
 		<h5 id="tableLocation"> Nearest Measurement: {{nearestLocation}} </h5>
-		
-		<select id="type" v-model="filter_type" onchange= "requestUpdate()">  <!-- Used to filter by specific parameter -->
-            <option v-for="option in filter_type_options" :value="option.value">{{ option.text }}</option> 
-        </select> 
-		
-		<span v-if="filter_type != 'all'"> <!-- Show these in the webpage if user wants to filter -->
-			<select id="type2" v-model="filter_sign" onchange= "requestUpdate()">  
-				<option v-for="option2 in filter_specifics_options" :value="option2.value">{{ option2.text }}</option> 
-			</select> 
+
+		<select id="type" v-model="filter_type" onchange="requestUpdate()">
+			<!-- Used to filter by specific parameter -->
+			<option v-for="option in filter_type_options" :value="option.value">{{ option.text }}</option>
+		</select>
+
+		<span v-if="filter_type != 'all'">
+			<!-- Show these in the webpage if user wants to filter -->
+			<select id="type2" v-model="filter_sign" onchange="requestUpdate()">
+				<option v-for="option2 in filter_specifics_options" :value="option2.value">{{ option2.text }}</option>
+			</select>
 			<input id="specificBox" type="text" v-model="filter_amount" v-on:keyup.enter="requestUpdate()"></input>
 		</span>
-		
+
 		<table id="realTable">
 			<tr>
 				<th> Parameters </th>
@@ -85,9 +87,15 @@
 				<th> Unit </th>
 			</tr>
 			<tr v-for="item in searchResults" v-bind:style="background(item)">
-				<td class="tableData"> {{item.parameter}} </td>
-				<td class="tableData"> {{item.value}} </td>
-				<td class="tableData"> {{item.unit}} </td>
+				<td class="tableData">
+					<center> {{item.parameter}} </center>
+				</td>
+				<td class="tableData">
+					<center>{{item.value}}</center>
+				</td>
+				<td class="tableData">
+					<center>{{item.unit}}</center>
+				</td>
 			</tr>
 		</table>
 
@@ -97,7 +105,9 @@
 	<!--Color Legend Table -->
 	<table id="legend">
 		<tr>
-			<th> Color Legend </th>
+			<th>
+				Color Legend for Table
+			</th>
 		</tr>
 		<tr>
 			<td style="background-color: rgb(0,228,0);"> </td>
@@ -129,9 +139,11 @@
 
 	<!-- Button for Fullscreen -->
 	<button id="fullButton" type="button">
-		<span style="font-size:30px;cursor:pointer">&#9776; open</span>
+		<span style="font-size:2rem ;cursor:pointer">&#10529; Go Full</span>
 	</button>
-	<!-- End of FullScreen Button -->
+	<!--End of FullScreen Button  -->
+	<!-- Issue: When going into ful screen mode, the right side of the window, where the table is, take a longer time to update than normal. May be due to the positioning of the table and mapbox update conflicting -->
+
 
 	<!-- Map container, nothing needed to go in -->
 	<div id="map">

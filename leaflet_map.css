@@ -10,6 +10,8 @@ body {
 	height: 100%;
 	margin: 0;
 	padding: 0;
+	font-family: Verdana;
+
 }
 
 ul {
@@ -54,6 +56,7 @@ ul {
 
 .navigationlinks {
 	font-family: Arial;
+	font-weight: bold;
 	padding: 5vw;
 	color: white;
 
@@ -78,6 +81,7 @@ ul {
 
 }
 
+/* added due to different photo sizes*/
 #personalphoto2 {
 	float: left;
 	width: 150px;
@@ -177,12 +181,11 @@ h3 {
 	margin-left: 75%;
 	margin-top: 75vh;
 	width: 25%;
-	font-size: 60%;
+	font-size: 80%;
 	z-index: 1000;
 	background-color: black;
 	color: white;
 	border: 1px solid gray;
-
 }
 
 .head {

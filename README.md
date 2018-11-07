@@ -34,7 +34,7 @@ Grading Rubric (75 pts)
   * | **2 / 2** | **Populate** a table with most up-to-date air quality measurements (from the Open AQ Platform API)
     * Table should automatically update data based on location shown in map
       * Should account for both center and zoom level
-  * | **2 / 3**| Create an "**About the Project**" page
+  * | **3 / 3**| Create an "**About the Project**" page
     1. Short bio about each team member (including a photo)
     2. Description of the tools (frameworks, APIs, etc.) you used to create the application
     3. Video demo of the application (2 - 4 minutes)

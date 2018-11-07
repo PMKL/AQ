@@ -1,7 +1,7 @@
 var app;
 var app2;
 var myMap;
-var mapFullScreen;
+var mapFullScreen; //A boolean to set the full screen mode on/off
 
 //Map will be created here
 function initMap() {
@@ -88,7 +88,7 @@ function initMap() {
 					value: "o3",
 					text: "o3"
 				}
-
+				//The user will be allows to select any of the following particles/all to filter out and compare with a set value
             ],
 			filter_sign: "-",
 			filter_amount: "0",
@@ -109,12 +109,12 @@ function initMap() {
 					value: "-",
 					text: "-"
 				}
-
-
+				//These conditions may be selected so that the user may search/compare the measurements of a location to a value
             ]
 		},
 		methods: {
 			//Method used to change the background color of table data and banner for warning messages
+			//Thresholds for amount of particles in the air is specific for each one, and has a varies range of safty/danger
 			background: function (info) {
 				if (info.parameter === "pm10") {
 					var back = pmTen(info);
@@ -196,6 +196,7 @@ function initMap() {
 			}
 		}
 	})
+	// End of app
 
 	myMap.on('zoomend', requestUpdate);
 	//updates table with zoom change 
@@ -283,6 +284,7 @@ function mapSearch() {
 //-------------------//
 
 //Adds markers to the map
+// Markers are set around the world and will provide the data they have collected recently when hovered upon
 function addMarkers(data) {
 
 	var i;
@@ -326,11 +328,11 @@ function addMarkers(data) {
 
 	myMap.addLayer(testCluster); //used for clustering
 }
-//End of addMarkers
+// End of addMarkers
 
 //------------------//
 
-//Used to adjust styles when full screen button is toggled
+// Used to adjust styles when full screen button is toggled
 function full() { //Used to adjust styles when full screen button is toggled
 	var textBox = document.getElementById('textBox');
 	var table = document.getElementById('realTable');
@@ -379,11 +381,11 @@ function full() { //Used to adjust styles when full screen button is toggled
 	}
 
 }
-//End of full
+// End of full
 
 //-------------//
 
-//Infomation GET request function, obtains from nearest measurment taken
+// Infomation GET request function, obtains from nearest measurment taken
 function requestUpdate() {
 	var lat = myMap.getCenter().lat.toFixed(2);
 	var lng = myMap.getCenter().lng.toFixed(2);
@@ -423,6 +425,7 @@ function requestUpdate() {
 
 //-----------------------//
 
+// updateTable
 function updateTable(data) {
 	app2.display = false;
 	//Returns banner to invisible each time moved/updated
@@ -487,7 +490,7 @@ function updateTable(data) {
 //--------------------//
 
 /* The following functions are used to style the background color of certain elements in the table*/
-//For particle pm10
+// pm10
 function pmTen(data) {
 	if (data.value <= 54) {
 		return app.colors.green
@@ -505,7 +508,7 @@ function pmTen(data) {
 
 
 }
-
+// NO2
 function noTwo(data) {
 	if (data.unit === "ppb") {
 		if (data.value <= 53) {
@@ -557,7 +560,7 @@ function noTwo(data) {
 	}
 
 }
-
+// SO2
 function soTwo(data) {
 	if (data.unit === "ppb") {
 		if (data.value <= 35) {
@@ -608,7 +611,7 @@ function soTwo(data) {
 
 	}
 }
-
+// CO
 function carbonMono(data) {
 	if (data.unit === "ppm") {
 		if (data.value <= 4.4) {
@@ -641,8 +644,7 @@ function carbonMono(data) {
 		}
 	}
 }
-
-
+// pm25
 function pmTwoFive(data) {
 
 	if (data.value <= 12.0) {
@@ -660,7 +662,7 @@ function pmTwoFive(data) {
 	}
 
 }
-
+// O3
 function oThree(data) {
 	if (data.unit === "ppm") {
 		if (data.value <= 0.054) {
@@ -727,7 +729,13 @@ function changeBanner(data) {
 		}
 	}
 }
+//End of changeBanner
 
+//------------------
+
+// specificValue
+// The function is called when the user has set the option to filter and compare measurements of a location to their chosen value
+// If the measurment is able to fufill the condition, it will return true and be shown the user, if false it will return false and not update table
 function specificValue(value) {
 	var sign = app.filter_sign;
 	if (sign === '=') {
@@ -752,3 +760,4 @@ function specificValue(value) {
 		}
 	}
 } /*Function used for calculating what the filter method is and if the current parameter is within the filter*/
+// End of specificValue
